@@ -5,6 +5,7 @@
         1 HTML
         2 JS (Angular, TS, vanilla)
         3 Java
+	4 CSS (Bootstrap, Material Design, vanilla)
 
     Team Members:
         1 Bhavana
