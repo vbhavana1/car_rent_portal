@@ -1,2 +1,15 @@
-# car_rent_portal
-Final IBM web assessment
+# Car Rent Portal
+  Final IBM web assessment
+  
+    Technology used:
+        1 HTML
+        2 JS (Angular, TS, vanilla)
+        3 Java
+
+    Team Members:
+        1 Bhavana
+        2 Vyshnavi
+        3 Prafulla
+        4 Alok
+        5 Dheeraj
+        6 Akash
