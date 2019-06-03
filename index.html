@@ -105,7 +105,7 @@
 			  					<h4>Register with Us!</h4>
 							</div>
 								<div class="input-field">
-									<input type="text" name="fitstname" id="firstname" class="validate">
+									<input type="text" name="firstname" id="firstname" class="validate">
 									<label for="firstname">First name</label>
 								</div>
 								<div class="input-field">
@@ -116,13 +116,23 @@
 									<input type="text" name="mobileno" id="mobileno" class="validate">
 									<label for="mobileno">Mobile number</label>
 								</div>
+								<div class="row">
+									<div class="input-field col s6">
+										<select class="input-field col s6">
+											<option value="" selected disabled>Verify with</option>
+											<option value="aadhar">Aadhar</option>
+											<option value="pan">PAN</option>
+											<option value="passport">Passport</option>
+										</select>
+									</div>
+									<div class="input-field col s6">
+										<input type="text" name="verification_id" id="verification_id" class="validate">
+										<label for="verification_id">UID number</label>
+									</div>
+								</div>
 								<div class="input-field">
-									<select class="" name="useridentification">
-										<option value="aadhar">Aadhar</option>
-										<option value="pan">PAN</option>
-										<option value="passport">Passport</option>
-									</select>
-									<label for="useridentification">ID Proof</label>
+									<input type="text" name="username" id="username" class="validate">
+									<label for="username">Username</label>
 								</div>
 								<div class="input-field">
 									<input type="password" name="password" id="password" class="validate">
@@ -130,7 +140,7 @@
 								</div>
 								<div class="input-field">
 									<input type="password" name="cpassword" id="cpassword" class="validate">
-									<label for="cpassword">Username</label>
+									<label for="cpassword">Confirm Password</label>
 								</div>
 						</div>
 
@@ -149,12 +159,14 @@
 		<!-- Compiled and minified JavaScript -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
+		<!-- Initializing all the materialize elements -->
 		<script type="text/javascript">
 			$(document).ready(
 				function()	{
       				$('.sidenav').sidenav();
 					$('.slider').slider();
 					$('.modal').modal();
+					$('select').formSelect();
     			}
 			);
 
