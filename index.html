@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -9,27 +8,35 @@
 		<title>RentoCar: Rent a car</title>
 	</head>
 
-	<body>
-		<nav class="nav-wrapper blue z-depth-2">
-			<div class="container">
-				<a class="sidenav-trigger" href="#" data-target="menu-link">
-					<i class="material-icons">menu</i>
-				</a>
-				<a href="#" class="brand-logo">RentoCar</a>
-				<ul class="right hide-on-med-and-down">
-					<li>
-						<a href="#login" class="waves-effect waves-dark modal-trigger">Login</a>
-					</li>
-					<li>
-						<a href="#register" class="waves-effect waves-dark modal-trigger">Register</a>
-					</li>
-					<li>
-						<a href="#about" class="waves-effect waves-dark modal-trigger">About Us!</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
+	<body class="indigo lighten-5">
+		<!-- Navigation -->
+		<div class="navbar-fixed">
+			<nav class="nav-wrapper indigo darken-3">
+				<div class="container">
+					<a class="sidenav-trigger" href="#" data-target="menu-link">
+						<i class="material-icons">menu</i>
+					</a>
+					<div class="brand-logo">
+						<a href="#">
+							RentoCar
+						</a>
+					</div>
+					<ul class="right hide-on-med-and-down">
+						<li>
+							<a href="#login" class="waves-effect waves-dark modal-trigger">Login</a>
+						</li>
+						<li>
+							<a href="#register" class="waves-effect waves-dark modal-trigger">Register</a>
+						</li>
+						<li>
+							<a href="#about" class="waves-effect waves-dark modal-trigger">About Us</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
 
+		<!-- Side Navigation for mobile devices -->
 		<ul class="sidenav" id="menu-link">
 			<li>
 				<a href="#login" class="waves-effect waves-dark modal-trigger">Login</a>
@@ -42,67 +49,73 @@
 			</li>
 		</ul>
 
-		<div class="slider">
-			<ul class="slides">
-				<li>
-					<img src="images/mini_car.jpg"> <!-- random image -->
-					<div class="caption center-align">
-						<h3>Mini Cars</h3>
-						<h5 class="light grey-text text-lighten-3">Cheap and affordable</h5>
-					</div>
-				</li>
-				<li>
-					<img src="images/micro_car.jpg"> <!-- random image -->
-					<div class="caption left-align">
-			          <h3>Micro Cars</h3>
-			          <h5 class="light grey-text text-lighten-3">Cheap, affordable and space you can get</h5>
-			        </div>
-			    </li>
-				<li>
-		        	<img src="images/deluxe.jpg"> <!-- random image -->
-					<div class="caption right-align">
-						<h3>Deluxe Cars</h3>
-						<h5 class="light grey-text text-lighten-3">Expensive but comfortable</h5>
-					</div>
-				</li>
-				<li>
-			        <img src="images/suv.jpg"> <!-- random image -->
-			        <div class="caption center-align">
-			          <h3>SUV Cars</h3>
-			          <h5 class="light grey-text text-lighten-3">Faster, expensive ,comfortable and for those who care for looks</h5>
-			        </div>
-			      </li>
-			  </ul>
+		<!-- Slider to show car types -->
+		<div style="margin-top: 10px; padding-left: 10px; padding-right: 10px;">
+			<div class="slider">
+				<ul class="slides">
+					<li>
+						<img src="images/mini_car.jpg">
+						<div class="caption center-align">
+							<h3>Mini Cars</h3>
+							<h5 class="light grey-text text-lighten-3">Cheap and affordable</h5>
+						</div>
+					</li>
+					<li>
+						<img src="images/micro_car.jpg">
+						<div class="caption left-align">
+			          	<h3>Micro Cars</h3>
+			          	<h5 class="light grey-text text-lighten-3">Cheap, affordable and space you can get</h5>
+			        	</div>
+			    	</li>
+					<li>
+		        		<img src="images/deluxe_car.jpg">
+						<div class="caption right-align">
+							<h3>Deluxe Cars</h3>
+							<h5 class="light grey-text text-lighten-3">Expensive but comfortable</h5>
+						</div>
+					</li>
+					<li>
+			        	<img src="images/suv_car.jpg">
+			        	<div class="caption center-align">
+			          	<h3>SUV Cars</h3>
+			          	<h5 class="light grey-text text-lighten-3">Faster, expensive ,comfortable and for those who care for looks</h5>
+			        	</div>
+			      	</li>
+			  	</ul>
+			</div>
 		</div>
 
-			  <div class="modal" id="login">
-					<form class="form" action="/login" method="post">
-			  			<div class="modal-content">
-							<div class="">
-			  					<h4>Login!</h4>
+		<!-- Login modal -->
+		  <div class="modal" id="login">
+				<form class="form" action="/login" method="post">
+		  			<div class="modal-content">
+						<div class="">
+		  					<h4>Login</h4>
+						</div>
+							<div class="input-field">
+								<input type="text" name="username" id="username" class="validate">
+								<label for="username">Username</label>
 							</div>
-								<div class="input-field">
-									<input type="text" name="username" id="username" class="validate">
-									<label for="username">Username</label>
-								</div>
-								<div class="input-field">
-									<input type="password" name="password" id="password" class="validate">
-									<label for="password">Password</label>
-								</div>
-						</div>
-						<div class="modal-footer">
-								<button type="submit" class="btn blue grey-text text-lighten-2 waves-effect waves-dark modal-close" name="submit">
-									Login
-								<i class="material-icons right">send</i>
-								</button>
-						</div>
-					</form>
-			  </div>
+							<div class="input-field">
+								<input type="password" name="password" id="password" class="validate">
+								<label for="password">Password</label>
+							</div>
+					</div>
+					<div class="modal-footer">
+							<button type="submit" class="btn indigo darken-1 grey-text text-lighten-2 waves-effect waves-dark modal-close" name="submit">
+								Login
+							<i class="material-icons right">send</i>
+							</button>
+					</div>
+				</form>
+		  </div>
+
+		  <!-- Register modal -->
  		  <div class="modal" id="register">
 					<form class="form" action="/register" method="post">
 			  			<div class="modal-content">
 							<div class="">
-			  					<h4>Register with Us!</h4>
+			  					<h4>Register with Us</h4>
 							</div>
 								<div class="input-field">
 									<input type="text" name="firstname" id="firstname" class="validate">
@@ -145,13 +158,92 @@
 						</div>
 
 						<div class="modal-footer">
-								<button type="submit" class="btn blue grey-text text-lighten-2 waves-effect waves-dark modal-close" name="submit">
+								<button type="submit" class="btn indigo darken-1 grey-text text-lighten-2 waves-effect waves-dark modal-close" name="submit">
 									Register
 								<i class="material-icons right">send</i>
 								</button>
 						</div>
 					</form>
 			  </div>
+
+			  <!-- Cards -->
+			  <div class="row">
+				  <div class="col s12 m4 l3">
+					  <div class="card amber lighten-5 z-depth-3">
+						  <div class="card-image waves-effect waves-block waves-light">
+							  <img class="activator" src="images/mini_car.jpg">
+						  </div>
+						  <div class="card-content">
+							  <span class="card-title activator grey-text text-darken-4">Mini Cars<i class="material-icons right">more_vert</i></span>
+							  <p><a href="#">See all Mini cars</a></p>
+						  </div>
+						  <div class="card-reveal indigo lighten-3">
+							  <span class="card-title grey-text text-darken-4">Mini Cars<i class="material-icons right">close</i></span>
+							  <p>Here is some more information about this product that is only revealed once clicked on.</p>
+						  </div>
+					  </div>
+				  </div>
+				  <div class="col s12 m4 l3">
+					  <div class="card amber lighten-5 z-depth-3">
+						  <div class="card-image waves-effect waves-block waves-light">
+							  <img class="activator" src="images/micro_car.jpg">
+						  </div>
+						  <div class="card-content">
+							  <span class="card-title activator grey-text text-darken-4">Micro Cars<i class="material-icons right">more_vert</i></span>
+							  <p><a href="#">See all Micro cars</a></p>
+						  </div>
+						  <div class="card-reveal indigo lighten-3">
+							  <span class="card-title grey-text text-darken-4">Micro Cars<i class="material-icons right">close</i></span>
+							  <p>Here is some more information about this product that is only revealed once clicked on.</p>
+						  </div>
+					  </div>
+				  </div>
+				  <div class="col s12 m4 l3">
+					  <div class="card amber lighten-5 z-depth-3">
+						  <div class="card-image waves-effect waves-block waves-light">
+							  <img class="activator" src="images/deluxe_car.jpg">
+						  </div>
+						  <div class="card-content">
+							  <span class="card-title activator grey-text text-darken-4">Deluxe Cars<i class="material-icons right">more_vert</i></span>
+							  <p><a href="#">See all Deluxe cars</a></p>
+						  </div>
+						  <div class="card-reveal indigo lighten-3">
+							  <span class="card-title grey-text text-darken-4">Deluxe Cars<i class="material-icons right">close</i></span>
+							  <p>Here is some more information about this product that is only revealed once clicked on.</p>
+						  </div>
+					  </div>
+				  </div>
+				  <div class="col s12 m4 l3">
+					  <div class="card amber lighten-5 z-depth-3">
+						  <div class="card-image waves-effect waves-block waves-light">
+							  <img class="activator" src="images/suv_car.jpg">
+						  </div>
+						  <div class="card-content">
+							  <span class="card-title activator grey-text text-darken-4">SUV Cars<i class="material-icons right">more_vert</i></span>
+							  <p><a href="#">See all SUV cars</a></p>
+						  </div>
+						  <div class="card-reveal indigo lighten-3">
+							  <span class="card-title grey-text text-darken-4">SUV Cars<i class="material-icons right">close</i></span>
+							  <p>Here is some more information about this product that is only revealed once clicked on.</p>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+
+			  <footer>
+				  <div class="footer-copyright indigo lighten-4" style="padding-top: 20px; padding-bottom: 1px;">
+					  <div class="container">
+						  <div class="row">
+						  	<div class="col">
+					  			&copy RentoCar 2018-2019
+						  	</div>
+							<div class="col right">
+								<a href="#!" class="">Contact Us</a>
+							</div>
+						  </div>
+					  </div>
+				  </div>
+			  </footer>
 
 		<!-- JQuery -->
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -162,19 +254,28 @@
 		<!-- Initializing all the materialize elements -->
 		<script type="text/javascript">
 			$(document).ready(
-				function()	{
+				()=>	{
+					// Sidenav initialization
       				$('.sidenav').sidenav();
-					$('.slider').slider();
-					$('.modal').modal();
-					$('select').formSelect();
-    			}
-			);
 
-			$('.carousel.carousel-slider').carousel(
-				{
-  					fullWidth: true,
-  					indicators: true
-				}
+					// Slider initialization and params setting
+					$('.slider').slider(
+						{
+							indicators: false,
+							height: 450,
+							interval: 3000
+						}
+					);
+
+					// Modal initialization
+					$('.modal').modal();
+
+					// Form initialization
+					$('select').formSelect();
+
+					// $('.datepicker').datepicker();
+					// $('.timepicker').timepicker();
+    			}
 			);
 		</script>
 	</body>
