@@ -1,0 +1,24 @@
+[
+{"type":"header","version":"4.8.5","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"car_rent"},
+{"type":"table","name":"car_status","database":"car_rent","data":
+[
+
+]
+}
+,{"type":"table","name":"car_table","database":"car_rent","data":
+[
+
+]
+}
+,{"type":"table","name":"users_log","database":"car_rent","data":
+[
+
+]
+}
+,{"type":"table","name":"user_table","database":"car_rent","data":
+[
+
+]
+}
+]
