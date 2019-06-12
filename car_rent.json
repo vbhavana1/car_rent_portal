@@ -3,22 +3,22 @@
 {"type":"database","name":"car_rent"},
 {"type":"table","name":"car_status","database":"car_rent","data":
 [
-
+{"car_no":"KA-4344534","car_id":"1001","user_id":"432523443","status":"booked"}
 ]
 }
 ,{"type":"table","name":"car_table","database":"car_rent","data":
 [
-
+{"car_id":"1001","car_type":"SUV","mileage":"20","seaters":"8","description":"good, fast and comfortable","cost":"350","car_name":"Bolero","img_path":"\/image\/bolero.jpg"}
 ]
 }
 ,{"type":"table","name":"users_log","database":"car_rent","data":
 [
-
+{"user_id":"432523443","start_time":"2019-06-12 00:00:00","end_time":"2019-06-13 00:00:00","delivered_time":"2019-06-14 00:00:00","current_location":"manyata, bangalore","drop_location":"matikere, bangalore","msg":null,"total_amount":"5000","paid_amount":"4500","secret_key":"552424244"}
 ]
 }
 ,{"type":"table","name":"user_table","database":"car_rent","data":
 [
-
+{"user_id":"432523443","first_name":"akash","last_name":"chandra","mobile_num":"8979583828","govt_id_type":"aadhar","govt_id_no":"210864211830","driving_license_no":"DL-123432342","user_name":"akaxh","password":"notyetneeded","email":"akashchandra111@gmail.com","wallet":"1000"}
 ]
 }
 ]
