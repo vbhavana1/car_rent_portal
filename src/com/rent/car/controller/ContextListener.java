@@ -19,7 +19,7 @@ public class ContextListener implements ServletContextListener, ServletContextAt
 	private static Connection dbConnection = null;
 	private static Debug debug = null; 
 	
-	public static Connection createConnection(String dbName, String port, String userName, String password)	{	
+	public static Connection createConnection(String dbName, String port, String userName, String password)	{
 		try	{
 			String timeZoneCorrection = "?serverTimezone=" + TimeZone.getDefault().getID();
 			
@@ -31,6 +31,20 @@ public class ContextListener implements ServletContextListener, ServletContextAt
 		catch(ClassNotFoundException | SQLException e)	{
 			debug.printMessage("createConnection", "unable to open database connection");
 			return null;
+		}
+	}
+	
+	public static void closeConnection(ServletContextEvent arg0)	{
+		
+		//Closing the dbConnection
+        try {
+        	debug.printMessage("closeConnection", "connection is being destroyed.");
+			ContextListener.dbConnection.close();
+			arg0.getServletContext().setAttribute("dbConnection", null);
+		}
+        catch (SQLException e) {
+			debug.printMessage("closeConnection", "unable to close database connection.");
+			e.printStackTrace();
 		}
 	}
 
@@ -55,15 +69,9 @@ public class ContextListener implements ServletContextListener, ServletContextAt
     }
 
     public void contextDestroyed(ServletContextEvent arg0)  {
+    	
     	//Closing the dbConnection
-        try {
-        	debug.printMessage("contextDestroyed", "connection is being destroyed.");
-			ContextListener.dbConnection.close();
-			arg0.getServletContext().setAttribute("dbConnection", null);
-		} catch (SQLException e) {
-			debug.printMessage("contextDestroyed", "unable to close database connection.");
-			e.printStackTrace();
-		}
+    	ContextListener.closeConnection(arg0);
     }
 
 //    public static Connection useContextConnection() throws RentCarException	{

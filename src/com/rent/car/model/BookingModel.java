@@ -94,7 +94,7 @@ public class BookingModel implements BookingModelInterface {
 			BookingModel.stmt = this.dbConnection.prepareStatement(query);
 			BookingModel.stmt.setString(1, id);
 			
-			ResultSet rs = BookingModel.stmt.executeQuery(query);
+			ResultSet rs = BookingModel.stmt.executeQuery();
 			String returnIt = "";
 			
 			while(rs.next())	{

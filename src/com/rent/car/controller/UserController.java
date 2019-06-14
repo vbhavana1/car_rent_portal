@@ -16,6 +16,10 @@ public class UserController implements UserControllerInterface	{
 	public boolean isIdPresent(String id) {
 		return this.userModel.isIdPresent(id);
 	}
+	
+	public boolean isEmailPresent(String email)	{
+		return this.userModel.isEmailPresent(email);
+	}
 
 	@Override
 	public String getName(String id) {
