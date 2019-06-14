@@ -6,26 +6,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.rent.car.bean.Booking;
+//import com.rent.car.controller.ContextListener;
 import com.rent.car.helper.Debug;
-import com.rent.car.helper.RentCarException;
+//import com.rent.car.helper.RentCarException;
 
 public class BookingModel implements BookingModelInterface {
-	private static Connection dbConnection;
+	private Connection dbConnection;
 	private static PreparedStatement stmt;
 	private static Debug debug;
+	
+	public BookingModel(Connection dbConnection)	{
+		this.dbConnection = dbConnection;
+	}
 	
 	static	{
 		// Setting the debug mode
 		BookingModel.debug = new Debug();
 		BookingModel.debug.setPrintLog(true);
 		
-		try	{
-			BookingModel.dbConnection = ContextListener.useContextConnection();
-		}
-		catch(RentCarException rce)	{
-			BookingModel.debug.printMessage("BookingModel.static_block", "connection is not established");
-			System.out.println(rce);
-		}
+//		try	{
+//			this.dbConnection = ContextListener.useContextConnection();
+//		}
+//		catch(RentCarException rce)	{
+//			BookingModel.debug.printMessage("BookingModel.static_block", "connection is not established");
+//			System.out.println(rce);
+//		}
 	}
 
 	@Override
@@ -33,7 +38,7 @@ public class BookingModel implements BookingModelInterface {
 		String query = "select car_no from car_status where car_no=?";
 		
 		try	{
-			BookingModel.stmt = BookingModel.dbConnection.prepareStatement(query);
+			BookingModel.stmt = this.dbConnection.prepareStatement(query);
 			BookingModel.stmt.setString(1, id);
 			
 			ResultSet rs = BookingModel.stmt.executeQuery();
@@ -59,7 +64,7 @@ public class BookingModel implements BookingModelInterface {
 		String query = "insert into car_status values (?,?,?,?)";
 		
 		try	{
-			BookingModel.stmt = BookingModel.dbConnection.prepareStatement(query);
+			BookingModel.stmt = this.dbConnection.prepareStatement(query);
 			BookingModel.stmt.setString(1, booking.getCarNumber());
 			BookingModel.stmt.setString(2, booking.getCarId());
 			BookingModel.stmt.setString(3, booking.getUserId());
@@ -86,7 +91,7 @@ public class BookingModel implements BookingModelInterface {
 		String query = String.format("select %s from car_status where car_no=?", whatToGet);
 		
 		try {
-			BookingModel.stmt = BookingModel.dbConnection.prepareStatement(query);
+			BookingModel.stmt = this.dbConnection.prepareStatement(query);
 			BookingModel.stmt.setString(1, id);
 			
 			ResultSet rs = BookingModel.stmt.executeQuery(query);
@@ -110,7 +115,7 @@ public class BookingModel implements BookingModelInterface {
 		String query = String.format("update car_status set %s=? where car_no=?", whatToUpdate);
 		
 		try	{
-			BookingModel.stmt = BookingModel.dbConnection.prepareStatement(query);
+			BookingModel.stmt = this.dbConnection.prepareStatement(query);
 			BookingModel.stmt.setString(1, value);
 			BookingModel.stmt.setString(2, id);
 			
@@ -163,7 +168,7 @@ public class BookingModel implements BookingModelInterface {
 		String query = "delete from car_status where car_no=? limit 1";
 		
 		try	{
-			BookingModel.stmt = BookingModel.dbConnection.prepareStatement(query);
+			BookingModel.stmt = this.dbConnection.prepareStatement(query);
 			BookingModel.stmt.setString(1, id);
 			
 			if(BookingModel.stmt.executeUpdate() != 0)	{

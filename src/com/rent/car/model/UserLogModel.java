@@ -6,15 +6,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.rent.car.bean.UserLog;
+//import com.rent.car.controller.ContextListener;
 import com.rent.car.helper.Debug;
-import com.rent.car.helper.RentCarException;
+//import com.rent.car.helper.RentCarException;
 
 
 public class UserLogModel implements UserLogModelInterface	{
 	
-	private static Connection dbConnection;
+	private Connection dbConnection;
 	private static PreparedStatement stmt;
 	private static Debug debug;
+	
+	public UserLogModel(Connection dbConnection)	{
+		this.dbConnection = dbConnection;
+	}
 	
 	static	{
 		
@@ -22,13 +27,13 @@ public class UserLogModel implements UserLogModelInterface	{
 		UserLogModel.debug = new Debug();
 		UserLogModel.debug.setPrintLog(true);
 		
-		try	{
-			UserLogModel.dbConnection = ContextListener.useContextConnection();
-		}
-		catch(RentCarException rce)	{
-			UserLogModel.debug.printMessage("BookingModel.static_block", "connection is not established");
-			System.out.println(rce);
-		}
+//		try	{
+//			this.dbConnection = ContextListener.useContextConnection();
+//		}
+//		catch(RentCarException rce)	{
+//			UserLogModel.debug.printMessage("BookingModel.static_block", "connection is not established");
+//			System.out.println(rce);
+//		}
 	}
 
 	@Override
@@ -36,7 +41,7 @@ public class UserLogModel implements UserLogModelInterface	{
 		String query = "select userLog_id from user_table where user_id=?";
 		
 		try	{
-			UserLogModel.stmt = UserLogModel.dbConnection.prepareStatement(query);
+			UserLogModel.stmt = this.dbConnection.prepareStatement(query);
 			UserLogModel.stmt.setString(1, id);
 			
 			ResultSet rs = UserLogModel.stmt.executeQuery();
@@ -62,7 +67,7 @@ public class UserLogModel implements UserLogModelInterface	{
 		String query = "insert into users_log values (?,?,?,?,?,?,?,?,?,?)";
 		
 		try	{
-			UserLogModel.stmt = UserLogModel.dbConnection.prepareStatement(query);
+			UserLogModel.stmt = this.dbConnection.prepareStatement(query);
 			UserLogModel.stmt.setString(1, userLog.getUserId());
 			UserLogModel.stmt.setString(2, userLog.getStartTime());
 			UserLogModel.stmt.setString(3, userLog.getEndTime());
@@ -95,7 +100,7 @@ public class UserLogModel implements UserLogModelInterface	{
 		String query = String.format("select %s from users_log where user_id=? and secret_key=?", whatToGet);
 		
 		try {
-			UserLogModel.stmt = UserLogModel.dbConnection.prepareStatement(query);
+			UserLogModel.stmt = this.dbConnection.prepareStatement(query);
 			UserLogModel.stmt.setString(1, id);
 			UserLogModel.stmt.setString(2, secretKey);
 			
@@ -120,7 +125,7 @@ public class UserLogModel implements UserLogModelInterface	{
 		String query = String.format("update users_log set %s=? where user_id=? and secret_key=?", whatToUpdate);
 		
 		try	{
-			UserLogModel.stmt = UserLogModel.dbConnection.prepareStatement(query);
+			UserLogModel.stmt = this.dbConnection.prepareStatement(query);
 			UserLogModel.stmt.setString(1, value);
 			UserLogModel.stmt.setString(2, id);
 			UserLogModel.stmt.setString(3, secretKey);
@@ -234,7 +239,7 @@ public class UserLogModel implements UserLogModelInterface	{
 		String query = "delete from users_log where userLog_id=? limit 1";
 		
 		try	{
-			UserLogModel.stmt = UserLogModel.dbConnection.prepareStatement(query);
+			UserLogModel.stmt = this.dbConnection.prepareStatement(query);
 			UserLogModel.stmt.setString(1, id);
 			
 			if(UserLogModel.stmt.executeUpdate() != 0)	{

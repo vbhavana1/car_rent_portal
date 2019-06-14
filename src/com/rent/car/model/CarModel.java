@@ -6,28 +6,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.rent.car.bean.Car;
+//import com.rent.car.controller.ContextListener;
 import com.rent.car.helper.Debug;
-import com.rent.car.helper.RentCarException;
+//import com.rent.car.helper.RentCarException;
 
 public class CarModel implements CarModelInterface	{
-	
-	private static Connection dbConnection;
+	private Connection dbConnection;
 	private static PreparedStatement stmt;
 	private static Debug debug;
 	
+	public CarModel(Connection dbConnection)	{
+		this.dbConnection = dbConnection;
+	}
+	
 	static	{
-		
 		// Setting the debug mode
 		CarModel.debug = new Debug();
 		CarModel.debug.setPrintLog(true);
 		
-		try	{
-			CarModel.dbConnection = ContextListener.useContextConnection();
-		}
-		catch(RentCarException rce)	{
-			CarModel.debug.printMessage("CarModel.static_block", "connection is not established");
-			System.out.println(rce);
-		}
+//		try	{
+//			this.dbConnection = ContextListener.useContextConnection();
+//		}
+//		catch(RentCarException rce)	{
+//			CarModel.debug.printMessage("CarModel.static_block", "connection is not established");
+//			System.out.println(rce);
+//		}
 	}
 
 	@Override
@@ -35,7 +38,7 @@ public class CarModel implements CarModelInterface	{
 		String query = String.format("select %s from car_table where car_id=?", whatToGet);
 		
 		try {
-			CarModel.stmt = CarModel.dbConnection.prepareStatement(query);
+			CarModel.stmt = this.dbConnection.prepareStatement(query);
 			CarModel.stmt.setString(1, id);
 			
 			ResultSet rs = CarModel.stmt.executeQuery(query);
@@ -59,7 +62,7 @@ public class CarModel implements CarModelInterface	{
 		String query = "insert into car_table values (?,?,?,?,?,?,?,?)";
 		
 		try	{
-			CarModel.stmt = CarModel.dbConnection.prepareStatement(query);
+			CarModel.stmt = this.dbConnection.prepareStatement(query);
 			CarModel.stmt.setString(1, car.getId());
 			CarModel.stmt.setString(2, car.getType());
 			CarModel.stmt.setString(3, car.getMileage());
@@ -90,7 +93,7 @@ public class CarModel implements CarModelInterface	{
 		String query = String.format("update car_table set %s=? where car_id=?", whatToUpdate);
 		
 		try	{
-			CarModel.stmt = CarModel.dbConnection.prepareStatement(query);
+			CarModel.stmt = this.dbConnection.prepareStatement(query);
 			CarModel.stmt.setString(1, value);
 			CarModel.stmt.setString(2, id);
 			
@@ -114,7 +117,7 @@ public class CarModel implements CarModelInterface	{
 		String query = "select car_id from car_table where car_id=?";
 		
 		try	{
-			CarModel.stmt = CarModel.dbConnection.prepareStatement(query);
+			CarModel.stmt = this.dbConnection.prepareStatement(query);
 			CarModel.stmt.setString(1, id);
 			
 			ResultSet rs = CarModel.stmt.executeQuery();
@@ -217,7 +220,7 @@ public class CarModel implements CarModelInterface	{
 		String query = "delete from car_table where car_id=? limit 1";
 		
 		try	{
-			CarModel.stmt = CarModel.dbConnection.prepareStatement(query);
+			CarModel.stmt = this.dbConnection.prepareStatement(query);
 			CarModel.stmt.setString(1, id);
 			
 			if(CarModel.stmt.executeUpdate() != 0)	{

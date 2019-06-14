@@ -6,14 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.rent.car.bean.Person;
+//import com.rent.car.controller.ContextListener;
 import com.rent.car.helper.Debug;
-import com.rent.car.helper.RentCarException;
+//import com.rent.car.helper.RentCarException;
 
 public class UserModel implements UserModelInterface {
 	
-	private static Connection dbConnection;
+	private Connection dbConnection;
 	private static PreparedStatement stmt;
 	private static Debug debug;
+	
+	public UserModel(Connection dbConnection)	{
+		this.dbConnection = dbConnection;
+	}
 	
 	static	{
 		
@@ -21,13 +26,13 @@ public class UserModel implements UserModelInterface {
 		UserModel.debug = new Debug();
 		UserModel.debug.setPrintLog(true);
 		
-		try	{
-			UserModel.dbConnection = ContextListener.useContextConnection();
-		}
-		catch(RentCarException rce)	{
-			UserModel.debug.printMessage("UserModel.static_block", "connection is not established");
-			System.out.println(rce);
-		}
+//		try	{
+//			this.dbConnection = ContextListener.useContextConnection();
+//		}
+//		catch(RentCarException rce)	{
+//			UserModel.debug.printMessage("UserModel.static_block", "connection is not established");
+//			System.out.println(rce);
+//		}
 	}
 
 	@Override
@@ -35,7 +40,7 @@ public class UserModel implements UserModelInterface {
 		String query = String.format("select %s from user_table where user_id=?", whatToGet);
 		
 		try {
-			UserModel.stmt = UserModel.dbConnection.prepareStatement(query);
+			UserModel.stmt = this.dbConnection.prepareStatement(query);
 			UserModel.stmt.setString(1, id);
 			
 			ResultSet rs = UserModel.stmt.executeQuery(query);
@@ -59,7 +64,7 @@ public class UserModel implements UserModelInterface {
 		String query = "insert into user_table values (?,?,?,?,?,?,?,?,?,?,?)";
 		
 		try	{
-			UserModel.stmt = UserModel.dbConnection.prepareStatement(query);
+			UserModel.stmt = this.dbConnection.prepareStatement(query);
 			UserModel.stmt.setString(1, person.getId());
 			UserModel.stmt.setString(2, person.getFirstName());
 			UserModel.stmt.setString(3, person.getLastName());
@@ -93,7 +98,7 @@ public class UserModel implements UserModelInterface {
 		String query = String.format("update user_table set %s=? where user_id=?", whatToUpdate);
 		
 		try	{
-			UserModel.stmt = UserModel.dbConnection.prepareStatement(query);
+			UserModel.stmt = this.dbConnection.prepareStatement(query);
 			UserModel.stmt.setString(1, value);
 			UserModel.stmt.setString(2, id);
 			
@@ -117,7 +122,7 @@ public class UserModel implements UserModelInterface {
 		String query = "select user_id from user_table where user_id=?";
 		
 		try	{
-			UserModel.stmt = UserModel.dbConnection.prepareStatement(query);
+			UserModel.stmt = this.dbConnection.prepareStatement(query);
 			UserModel.stmt.setString(1, id);
 			
 			ResultSet rs = UserModel.stmt.executeQuery();
@@ -249,7 +254,7 @@ public class UserModel implements UserModelInterface {
 		String query = "delete from user_table where user_id=? limit 1";
 		
 		try	{
-			UserModel.stmt = UserModel.dbConnection.prepareStatement(query);
+			UserModel.stmt = this.dbConnection.prepareStatement(query);
 			UserModel.stmt.setString(1, id);
 			
 			if(UserModel.stmt.executeUpdate() != 0)	{
@@ -271,7 +276,7 @@ public class UserModel implements UserModelInterface {
 		String query = "select user_id from user_table where mobile_num=? or user_name=? or email=?";
 		
 		try {
-			UserModel.stmt = UserModel.dbConnection.prepareStatement(query);
+			UserModel.stmt = this.dbConnection.prepareStatement(query);
 			UserModel.stmt.setString(1, uniqueId);
 			UserModel.stmt.setString(2, uniqueId);
 			UserModel.stmt.setString(3, uniqueId);
