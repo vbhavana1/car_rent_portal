@@ -12,6 +12,10 @@ public class UserController implements UserControllerInterface	{
 		this.userModel = new UserModel(dbConnection);
 	}
 	
+	public boolean isPresent(String value, String whatToCheck)	{
+		return this.userModel.isPresent(value, whatToCheck);
+	}
+	
 	@Override
 	public boolean isIdPresent(String id) {
 		return this.userModel.isIdPresent(id);

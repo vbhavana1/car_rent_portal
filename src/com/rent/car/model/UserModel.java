@@ -281,7 +281,7 @@ public class UserModel implements UserModelInterface {
 			UserModel.stmt.setString(2, uniqueId);
 			UserModel.stmt.setString(3, uniqueId);
 			
-			ResultSet rs = UserModel.stmt.executeQuery(query);
+			ResultSet rs = UserModel.stmt.executeQuery();
 			String returnIt = "";
 			
 			while(rs.next())	{
