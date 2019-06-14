@@ -1,4 +1,4 @@
-package com.rent.car.model;
+package com.rent.car.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +12,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import com.rent.car.helper.Debug;
-import com.rent.car.helper.RentCarException;
+//import com.rent.car.helper.RentCarException;
 
 @WebListener
 public class ContextListener implements ServletContextListener, ServletContextAttributeListener {
@@ -48,7 +48,6 @@ public class ContextListener implements ServletContextListener, ServletContextAt
     }
     
     public void attributeReplaced(ServletContextAttributeEvent arg0)  { 
-         // TODO Auto-generated method stub
     }
     
     public void contextInitialized(ServletContextEvent arg0)  {
@@ -67,14 +66,14 @@ public class ContextListener implements ServletContextListener, ServletContextAt
 		}
     }
 
-    public static Connection useContextConnection() throws RentCarException	{
-    	if(ContextListener.dbConnection == null)	{
-    		debug.printMessage("useContextConnection", "connection is not established yet by ContextListener");
-    		throw new RentCarException("connection is not yet made you can't use this connection");
-    	}
-    	else	{
-    		debug.printMessage("useContextConnection", "connection active and passed");
-    		return ContextListener.dbConnection;
-    	}
-    }
+//    public static Connection useContextConnection() throws RentCarException	{
+//    	if(ContextListener.dbConnection == null)	{
+//    		debug.printMessage("useContextConnection", "connection is not established yet by ContextListener");
+//    		throw new RentCarException("connection is not yet made you can't use this connection");
+//    	}
+//    	else	{
+//    		debug.printMessage("useContextConnection", "connection active and passed");
+//    		return ContextListener.dbConnection;
+//    	}
+//    }
 }
