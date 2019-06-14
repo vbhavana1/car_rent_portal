@@ -41,7 +41,7 @@ public class CarModel implements CarModelInterface	{
 			CarModel.stmt = this.dbConnection.prepareStatement(query);
 			CarModel.stmt.setString(1, id);
 			
-			ResultSet rs = CarModel.stmt.executeQuery(query);
+			ResultSet rs = CarModel.stmt.executeQuery();
 			String returnIt = "";
 			
 			while(rs.next())	{

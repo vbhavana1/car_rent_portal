@@ -104,7 +104,7 @@ public class UserLogModel implements UserLogModelInterface	{
 			UserLogModel.stmt.setString(1, id);
 			UserLogModel.stmt.setString(2, secretKey);
 			
-			ResultSet rs = UserLogModel.stmt.executeQuery(query);
+			ResultSet rs = UserLogModel.stmt.executeQuery();
 			String returnIt = "";
 			
 			while(rs.next())	{

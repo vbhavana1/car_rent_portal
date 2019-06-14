@@ -43,11 +43,12 @@ public class UserModel implements UserModelInterface {
 			UserModel.stmt = this.dbConnection.prepareStatement(query);
 			UserModel.stmt.setString(1, id);
 			
-			ResultSet rs = UserModel.stmt.executeQuery(query);
+			ResultSet rs = UserModel.stmt.executeQuery();
 			String returnIt = "";
 			
 			while(rs.next())	{
 				returnIt = rs.getString(1);
+
 			}
 			debug.printMessage("get", "id: " + id + " " + whatToGet + ": " + returnIt);
 			return returnIt;
@@ -116,10 +117,9 @@ public class UserModel implements UserModelInterface {
 			return false;
 		}
 	}
-	
-	@Override
-	public boolean isIdPresent(String id)	{
-		String query = "select user_id from user_table where user_id=?";
+
+	public boolean isPresent(String id, String whatToCheck)	{
+		String query = String.format("select %s from user_table where user_id=?", whatToCheck);
 		
 		try	{
 			UserModel.stmt = this.dbConnection.prepareStatement(query);
@@ -129,16 +129,16 @@ public class UserModel implements UserModelInterface {
 			
 			while(rs.next())	{
 				if(rs.getString(1).equals(id))	{
-					debug.printMessage("isIdPresent", "id:" + id + " is present");
+					debug.printMessage("isPresent", "id:" + id + " is present");
 					return true;
 				}
 			}
 			
-			debug.printMessage("isIdPresent", "id:" + id + " is not present");
+			debug.printMessage("isPresent", "id:" + id + " is not present");
 			return false;
 		}
 		catch(SQLException e)	{
-			debug.printMessage("isIdPresent", "cannot fetch id");
+			debug.printMessage("isPresent", "cannot fetch id");
 			return false;
 		}
 	}
@@ -295,5 +295,14 @@ public class UserModel implements UserModelInterface {
 			e.printStackTrace();
 			return "";
 		}
+	}
+	
+	@Override
+	public boolean isIdPresent(String id)	{
+		return this.isPresent(id, "user_id");
+	}
+	
+	public boolean isEmailPresent(String email)	{
+		return this.isPresent(email, "email");
 	}
 }
