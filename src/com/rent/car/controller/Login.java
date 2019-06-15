@@ -44,7 +44,7 @@ public class Login extends HttpServlet {
 			request.getRequestDispatcher("User.jsp").forward(request, response);
 		}
 		else	{
-			response.getWriter().append("user/password not found");
+			response.sendRedirect("index.html");
 		}
 	}
 
