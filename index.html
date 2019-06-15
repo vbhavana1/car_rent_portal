@@ -1,4 +1,4 @@
-<!-- [Author: Akash Chandra] -->
+
 
 <!DOCTYPE html>
 <html>
@@ -10,11 +10,10 @@
       <title>RentoCar: Rent a car</title>
       <style media="screen">
          .card-style{
-         	height: 56.25%;
-         	width: 99.5%;
+         height: 56.25%;
+         width: 99.5%;
          }
       </style>
-	  <script type="text/javascript" href="js/func.js"></script>
    </head>
    <body class="indigo lighten-5">
       <!-- Navigation -->
@@ -92,14 +91,14 @@
       </div>
       <!-- Login modal -->
       <div class="modal" id="login">
-         <form class="form" action="login" method="post">
+         <form class="form" action="/login" method="post">
             <div class="modal-content">
                <div class="">
                   <h4>Login</h4>
                </div>
                <div class="input-field">
                   <input type="text" name="username" id="username" class="validate">
-                  <label for="username">Username/ Email/ Phone</label>
+                  <label for="username">Username</label>
                </div>
                <div class="input-field">
                   <input type="password" name="password" id="password" class="validate">
@@ -116,7 +115,7 @@
       </div>
       <!-- Register modal -->
       <div class="modal" id="register">
-         <form class="form" action="register" method="post">
+         <form class="form" action="/register" method="post">
             <div class="modal-content">
                <div class="">
                   <h4>Register with Us</h4>
@@ -134,30 +133,22 @@
                   <label for="mobileno">Mobile number</label>
                </div>
                <div class="row">
-                  <div class="input-field col s4">
-                     <select class="input-field" name="idtype">
+                  <div class="input-field col s6">
+                     <select class="input-field col s6">
                         <option value="" selected disabled>Verify with</option>
-                        <option  value="aadhar">Aadhar</option>
-                        <option  value="pan">PAN</option>
-                        <option   value="passport">Passport</option>
+                        <option value="aadhar">Aadhar</option>
+                        <option value="pan">PAN</option>
+                        <option value="passport">Passport</option>
                      </select>
                   </div>
-                  <div class="input-field col s8">
+                  <div class="input-field col s6">
                      <input type="text" name="verification_id" id="verification_id" class="validate">
                      <label for="verification_id">UID number</label>
                   </div>
                </div>
                <div class="input-field">
-                  <input type="text" name="driving_id" id="driving_id" class="validate">
-                  <label for="username">Driving License Number</label>
-               </div>
-               <div class="input-field">
                   <input type="text" name="username" id="username" class="validate">
                   <label for="username">Username</label>
-               </div>
-               <div class="input-field">
-                  <input type="text" name="email" id="email" class="validate">
-                  <label for="username">Email</label>
                </div>
                <div class="input-field">
                   <input type="password" name="password" id="password" class="validate">
@@ -176,8 +167,9 @@
             </div>
          </form>
       </div>
-      <!-- Cards [Author: Dheeraj Joshi]-->
-      <div class="row">
+      <!-- Cards -->
+      <di
+	  v class="row">
          <div class="col s12 m6 l3">
             <div class="card amber lighten-5 z-depth-3 card-style">
                <div class="card-image waves-effect waves-block waves-light">
@@ -189,12 +181,12 @@
                </div>
                <div class="card-reveal indigo lighten-3">
                   <span class="card-title grey-text text-darken-4">Mini Cars<i class="material-icons right">close</i></span>
-                  <p>Affordable, distance and power in a mini package. Good for long distance travel purposes.</p>
+                  <p>Here is some more information about this product that is only revealed once clicked on.</p>
                </div>
             </div>
          </div>
-         <div class="col s12 m6 l3">
-            <div class="card amber lighten-5 z-depth-3">
+         <div class="col s12 m6  l3">
+            <div class="card amber lighten-5 z-depth-3 ">
                <div class="card-image waves-effect waves-block waves-light">
                   <img class="activator" src="images/micro_car.jpg">
                </div>
@@ -204,12 +196,12 @@
                </div>
                <div class="card-reveal indigo lighten-3">
                   <span class="card-title grey-text text-darken-4">Micro Cars<i class="material-icons right">close</i></span>
-                  <p>Affordable, distance with more power and more seats. Good for long distance travel purpose and extra comfortable.</p>
+                  <p>Here is some more information about this product that is only revealed once clicked on.</p>
                </div>
             </div>
          </div>
-         <div class="col s12 m6 l3">
-            <div class="card amber lighten-5 z-depth-3">
+         <div class="col s12 m6  l3">
+            <div class="card amber lighten-5 z-depth-3 card-style">
                <div class="card-image waves-effect waves-block waves-light">
                   <img class="activator" src="images/deluxe_car.jpg">
                </div>
@@ -219,12 +211,12 @@
                </div>
                <div class="card-reveal indigo lighten-3">
                   <span class="card-title grey-text text-darken-4">Deluxe Cars<i class="material-icons right">close</i></span>
-                  <p>Expensive, classy cars for those who prefer on looks. Good for short distance rides.</p>
+                  <p>Here is some more information about this product that is only revealed once clicked on.</p>
                </div>
             </div>
          </div>
-         <div class="col s12 m6 l3">
-            <div class="card amber lighten-5 z-depth-3">
+         <div class="col s12 m6  l3">
+            <div class="card amber lighten-5 z-depth-3 card-style">
                <div class="card-image waves-effect waves-block waves-light">
                   <img class="activator" src="images/suv_car.jpg">
                </div>
@@ -234,7 +226,7 @@
                </div>
                <div class="card-reveal indigo lighten-3">
                   <span class="card-title grey-text text-darken-4">SUV Cars<i class="material-icons right">close</i></span>
-                  <p>For those who likes to ride power. When you need space, power and comfort at one place.</p>
+                  <p>Here is some more information about this product that is only revealed once clicked on.</p>
                </div>
             </div>
          </div>
@@ -284,6 +276,5 @@
           			}
          );
       </script>
-	  <script type="text/javascript"></script>
    </body>
 </html>
