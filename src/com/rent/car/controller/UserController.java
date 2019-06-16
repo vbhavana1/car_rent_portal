@@ -24,6 +24,14 @@ public class UserController implements UserControllerInterface	{
 	public boolean isEmailPresent(String email)	{
 		return this.userModel.isEmailPresent(email);
 	}
+	
+	public boolean isUsernamePresent(String username)	{
+		return this.userModel.isUsernamePresent(username);
+	}
+	
+	public boolean isMobilePresent(String mobileNum)	{
+		return this.userModel.isMobilePresent(mobileNum);
+	}
 
 	@Override
 	public String getName(String id) {

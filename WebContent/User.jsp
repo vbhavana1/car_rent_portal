@@ -29,17 +29,18 @@
 
 	<%
 		String id = (String)request.getSession().getAttribute("session_id");
+		UserController user = (UserController)request.getSession().getAttribute("user_controller");
 		
-		if(id != null)	{
+		if(id != null && !user.getFirstName(id).equals(""))	{
 			
 			// Getting the necessary objects from session
-			UserController user = (UserController)request.getSession().getAttribute("user_controller");
 			UserLogController userLog = (UserLogController)request.getSession().getAttribute("user_log_controller");
 			BookingController booking = (BookingController)request.getSession().getAttribute("booking_controller");
 			
 			// Using the necessary objects
 			String userWallet = user.getWallet(id);
 			String userFirstName = user.getFirstName(id);
+			String userEmail = user.getEmail(id);
 			String carPickupLocation = userLog.getCurrentLocation(id);
 			String carPickupTime = userLog.getStartTime(id);
 	%>
@@ -94,8 +95,8 @@
 				   <a href="#user">
 					   <img src="../images/mini_car.jpg" class="circle">
 				   </a>
-				   <a href="#name"><span class="name white-text">User Name</span></a>
-				   <a href="#email"><span class="email white-text">Email</span></a>
+				   <a href="#name"><span class="name white-text"><%= userFirstName %></span></a>
+				   <a href="#email"><span class="email white-text"><%= userEmail %></span></a>
 			  </div>
 		  </li>
          <li>

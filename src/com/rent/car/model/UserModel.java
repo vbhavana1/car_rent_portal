@@ -305,4 +305,12 @@ public class UserModel implements UserModelInterface {
 	public boolean isEmailPresent(String email)	{
 		return this.isPresent(email, "email");
 	}
+	
+	public boolean isUsernamePresent(String username)	{
+		return this.isPresent(username, "user_name");
+	}
+	
+	public boolean isMobilePresent(String mobileNum)	{
+		return this.isPresent(mobileNum, "mobile_num");
+	}
 }
