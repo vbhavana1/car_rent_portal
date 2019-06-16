@@ -58,7 +58,7 @@
                </div>
                <ul class="right hide-on-med-and-down">
                   <li>
-                     <a href="#wallet" class="waves-effect waves-dark">Wallet</a>
+                     <a href="#modalwallet" class="waves-effect waves-light modal-trigger">Wallet</a>
                   </li>
                   <li>
                      <a href="#booking" class="waves-effect waves-dark dropdown-trigger" data-target="booking_dropdown">Booking</a>
@@ -190,6 +190,34 @@
 				  </div>
 			  </div>
 		  </div>
+		  
+		   <!-- Modal Structure  [Author: Dheeeraj Joshi]--> 
+  <div id="modalwallet" class="modal">
+    <form class="form" action="addwallet" method="post">
+   <div class="row container" style="margin-top:2%;">
+   <div class="col s12">
+    <div class="modal-content">
+      <h4>Add Money</h4>
+      </div>
+      </div>
+      </div>
+      <div class="row container" >
+      <div class="col s8 l8">
+      <div class="input-field ">
+        
+          <input id="amount" name="amount" type="text" class="validate">
+          <label for="money">Enter Amount </label>
+        </div>
+        </div>
+    <div class="col s4 l4">
+    <div class="modal-footer">
+     
+      <button type="submit" class="modal-close waves-effect waves-indigo btn left indigo " onclick="M.toast({html: 'Money Added TO Wallet'})" style="margin-left:2%;">Add Money</button>
+    </div>
+    </div>
+    </div>
+    </form>
+  </div>
 	  </div>
 
       <footer>
@@ -237,7 +265,10 @@
 
          		// $('.datepicker').datepicker();
          		// $('.timepicker').timepicker();
-          	}
+          	
+         		 $('.modal').modal();
+         	}
+         	
          );
       </script>
       
