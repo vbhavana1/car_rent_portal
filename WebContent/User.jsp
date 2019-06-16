@@ -18,12 +18,6 @@
       <!-- Compiled and minified CSS -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
       <title>RentoCar: Welcome</title>
-      <style media="screen">
-         .card-style{
-         	height: 56.25%;
-         	width: 99.5%;
-         }
-      </style>
 </head>
 <body>
 
@@ -91,9 +85,9 @@
       <ul class="sidenav" id="menu-link">
 		  <li>
 			  <div class="user-view">
-				   <div class="background indigo accent-2"></div>
+				   <div class="background indigo accent-4"></div>
 				   <a href="#user">
-					   <img src="../images/mini_car.jpg" class="circle">
+					   <img src="images/user_profile.png" class="circle">
 				   </a>
 				   <a href="#name"><span class="name white-text"><%= userFirstName %></span></a>
 				   <a href="#email"><span class="email white-text"><%= userEmail %></span></a>
@@ -137,7 +131,7 @@
 			  </div>
 		  </div>
 		  <div class="col s12 m6 l3">
-			  <div class="card-panel blue darken-3 z-depth-3">
+			  <div class="card-panel card-style blue darken-3 z-depth-3">
 				  <div class="row">
 					<div class="col s3">
 						<i class="material-icons medium right blue-text text-lighten-2" style="margin-top: 30%">bookmark</i>
@@ -161,7 +155,7 @@
 			  </div>
 		  </div>
 		  <div class="col s12 m6 l3">
-			  <div class="card-panel blue darken-3 z-depth-3">
+			  <div class="card-panel card-style blue darken-3 z-depth-3">
 				  <div class="row">
 					<div class="col s3">
 						<i class="material-icons medium right blue-text text-lighten-2" style="margin-top: 30%">local_offer</i>
