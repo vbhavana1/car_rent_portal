@@ -44,7 +44,9 @@ public class Login extends HttpServlet {
 			request.getRequestDispatcher("User.jsp").forward(request, response);
 		}
 		else	{
-			request.getRequestDispatcher("index.html").forward(request, response);
+			response.setContentType("text/html");
+			response.getWriter().append("UserId/Password doesn't match!");
+			request.getRequestDispatcher("Index.jsp").include(request, response);
 		}
 	}
 

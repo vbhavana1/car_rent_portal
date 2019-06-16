@@ -1,24 +1,20 @@
 <!-- [Author: Akash Chandra] -->
-<%
-UserController user = (UserController)request.getSession().getAttribute("user_controller");
-%>
-<!DOCTYPE html>
+
 <html>
-   <head>
-      <!--Import Google Icon Font-->
+	<head>
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!-- Compiled and minified CSS -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
       <title>RentoCar: Rent a car</title>
       <style media="screen">
          .card-style{
-         	height: 56.25%;
          	width: 99.5%;
          }
       </style>
 	  <script type="text/javascript" href="js/func.js"></script>
    </head>
    <body class="indigo lighten-5">
+	  
       <!-- Navigation -->
       <div class="navbar-fixed">
          <nav class="nav-wrapper indigo darken-3">
@@ -284,8 +280,7 @@ UserController user = (UserController)request.getSession().getAttribute("user_co
          		// $('.datepicker').datepicker();
          		// $('.timepicker').timepicker();
           	}
-         );
+         );        
       </script>
-	  <script type="text/javascript"></script>
    </body>
 </html>

@@ -17,7 +17,7 @@ public class Logout extends HttpServlet {
 		response.setContentType("text/html");
 		userSession.invalidate();
 		
-		request.getRequestDispatcher("index.html").forward(request, response);
+		request.getRequestDispatcher("Index.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
