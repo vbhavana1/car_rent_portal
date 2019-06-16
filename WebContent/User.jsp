@@ -94,15 +94,33 @@
 			  </div>
 		  </li>
          <li>
-            <a href="#wallet" class="waves-effect waves-dark">Wallet</a>
+            <a href="#modalwallet" class="waves-effect waves-light modal-trigger">Wallet</a>
          </li>
          <li>
-            <a href="#booking" class="waves-effect waves-dark">Booking</a>
+           <ul class="collapsible" id="collapsibleBooking" style="margin-left:5%;">
+           <li>
+      <div class="collapsible-header">Booking</div>
+      <div class="collapsible-body"><a href="#modalwallet" class="waves-effect waves-light modal-trigger"style="margin-left:5%;">Rent a Car</a></div>
+<div class="collapsible-body" ><a href="#modalwallet" class="waves-effect waves-light modal-trigger"style="margin-left:5%;">Current Booking</a></div>
+<div class="collapsible-body" ><a href="#modalwallet" class="waves-effect waves-light modal-trigger"style="margin-left:5%;">Booking</a></div>
+    </li>
+<!--             <a href="#booking" class="waves-effect waves-dark"></a> -->
+         </ul>
          </li>
          <li>
-            <a href="#account" class="waves-effect waves-dark">Account</a>
+         <ul class="collapsible" id="collapsibleAccount" style="margin-left:5%;">
+         <li>
+         <div class="collapsible-header">Account</div>
+         <div class="collapsible-body" ><a href="user_profile" class="waves-effect " style="margin-left:5%;">Profile</a></div>
+  <div class="collapsible-body" ><a href="logout" class="waves-effect " style="margin-left:5%;">Logout</a></div>        
+         
+<!-- 					  <li><a href="logout" class="indigo-text">Logout</a></li> -->
          </li>
       </ul>
+         </li>
+         </ul>
+         
+      
 
 	  <!-- Card Panel [Author: Akash Chandra]-->
 	  <div class="row">
@@ -196,14 +214,14 @@
       </div>
       </div>
       <div class="row container" >
-      <div class="col s8 l8">
+      <div class="col s6 l8">
       <div class="input-field ">
         
           <input id="amount" name="amount" type="text" class="validate">
           <label for="money">Enter Amount </label>
         </div>
         </div>
-    <div class="col s4 l4">
+    <div class="col s6 l4">
     <div class="modal-footer">
      
       <button type="submit" class="modal-close waves-effect waves-indigo btn left indigo " onclick="M.toast({html: 'Money Added TO Wallet'})" style="margin-left:2%;">Add Money</button>
@@ -261,6 +279,15 @@
          		// $('.timepicker').timepicker();
           	
          		 $('.modal').modal();
+         		 
+         		 //sidenav collapsible initialization
+         		
+         		    $('#collapsibleBooking').collapsible();
+         		  
+         		 
+         		
+         		    $('#collapsibleAccount').collapsible();
+         		 
          	}
          	
          );
