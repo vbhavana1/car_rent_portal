@@ -1,4 +1,3 @@
-<%@page import="com.rent.car.bean.UserLog"%>
 <%@page import="com.mysql.cj.Session"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -7,7 +6,8 @@
 	import="
 		com.rent.car.controller.UserController, 
 		com.rent.car.controller.BookingController, 
-		com.rent.car.controller.UserLogController, 
+		com.rent.car.controller.UserLogController,
+		com.rent.car.controller.CarController,
 		javax.servlet.http.HttpSession
 	"%>
 <!DOCTYPE html>
@@ -33,6 +33,7 @@
 			UserLogController userLog = (UserLogController) request.getSession()
 					.getAttribute("user_log_controller");
 			BookingController booking = (BookingController) request.getSession().getAttribute("booking_controller");
+			CarController car = (CarController) request.getSession().getAttribute("car_controller");
 
 			// Using the necessary objects
 			String userWallet = user.getWallet(id);
@@ -40,6 +41,7 @@
 			String userEmail = user.getEmail(id);
 			String carPickupLocation = userLog.getCurrentLocation(id);
 			String carPickupTime = userLog.getStartTime(id);
+			String carSecretKey = userLog.getSecretKey(id);
 	%>
 	<!-- Navigation -->
 	<div class="navbar-fixed">
@@ -184,6 +186,7 @@
 							%>
 							<p>
 								Pick up your car from <b><%=carPickupLocation%></b> at <b><%=carPickupTime%></b>
+								Use this secret key: <b><%=carSecretKey%></b>
 							</p>
 							<%
 								} else {

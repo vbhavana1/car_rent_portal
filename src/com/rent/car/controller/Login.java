@@ -31,6 +31,8 @@ public class Login extends HttpServlet {
 		// Used for console message
 		System.out.println("[Form gave]: Id: " + id + " password: " + password);
 		
+		response.setContentType("text/html");
+		
 		if((!id.equals("")) && (person.getPassword().equals(request.getParameter("password"))))	{
 			userSession.setAttribute("session_id", id);
 			
@@ -41,12 +43,19 @@ public class Login extends HttpServlet {
 			userSession.setAttribute("car_controller", car);
 			
 			//Moving to the login page
-			request.getRequestDispatcher("User.jsp").forward(request, response);
+			//response.getWriter().append("success");
+			
+			if(((String) userSession.getAttribute("session_id")).equals("0"))	{
+				request.getRequestDispatcher("AdminPanel.jsp").forward(request, response);
+			}
+			else	{
+				request.getRequestDispatcher("User.jsp").forward(request, response);
+			}
 		}
 		else	{
-			response.setContentType("text/html");
-			response.getWriter().append("UserId/Password doesn't match!");
-			request.getRequestDispatcher("Index.jsp").include(request, response);
+			// Sending the response to Index page for user login failure
+			response.getWriter().append("failure");
+			//request.getRequestDispatcher("Index.jsp").include(request, response);
 		}
 	}
 
