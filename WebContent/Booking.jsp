@@ -1,64 +1,136 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="com.mysql.cj.Session"%>
+<%@ 
+	page
+	import="
+		com.rent.car.controller.UserController, 
+		com.rent.car.controller.BookingController, 
+		com.rent.car.controller.UserLogController, 
+		javax.servlet.http.HttpSession
+	"%>
 <!-- [Author: Vyshnavi] -->
-
 <!DOCTYPE html>
 <html>
-   <head>
-      <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!-- Compiled and minified CSS -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-      
-      <title>Booking Page: RentoCar</title>
-   </head>
-   <body class="indigo lighten-5">
-      <!-- Navigation -->
-      <div class="navbar-fixed">
-         <nav class="nav-wrapper indigo darken-3">
-            <div class="container">
-               <a class="sidenav-trigger" href="#" data-target="menu-link">
-               <i class="material-icons">menu</i>
-               </a>
-               <div class="brand-logo">
-                  <a href="#">
-                  RentoCar
-                  </a>
-               </div>
-               <ul class="right hide-on-med-and-down">
-                  <li>
-                     <a href="Wallet.html" class="waves-effect waves-dark modal-trigger">Wallet</a>
-                  </li>
-                  <li>
-                     <a href="History.html" class="waves-effect waves-dark modal-trigger">History</a>
-                  </li>
-                  <li>
-                     <a href="#about" class="waves-effect waves-dark modal-trigger">Your Bookings</a>
-                  </li>
+<head>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<title>RentoCar: Welcome</title>
+</head>
+<body>
 
-                  <li>
-                      <a class="dropdown-trigger" href="#!" data-target="dropdown1" data-beloworigin="true">User Profile</a>
-                  </li>
-                    <ul id="dropdown1" class="dropdown-content">
-                        <li><a href="#!" class="indigo-text darken-3"><i class="material-icons indigo-text darken-3">account_circle</i>Profile</a></li>
-                        <li><a href="#!" class="indigo-text darken-3"><i class="material-icons indigo-text darken-3">exit_to_app</i>Logout</a></li>
-                    </ul>
-                          
-                  </li>
-               </ul>
-            </div>
-         </nav>
-      </div>
-      <!-- Side Navigation for mobile devices -->
-      <ul class="sidenav" id="menu-link">
-         <li>
-            <a href="#wallet" >Wallet</a>
-         </li>
-         <li>
-            <a href="#history">History</a>
-         </li>
-         <li>
-            <a href="#about">YourBookings</a>
-         </li>
-      </ul><!------Side Navigation ends here----->
+	<%
+		String id = (String) request.getSession().getAttribute("session_id");
+		UserController user = (UserController) request.getSession().getAttribute("user_controller");
+
+		if (id != null && !user.getFirstName(id).equals("")) {
+
+			// Getting the necessary objects from session
+			UserLogController userLog = (UserLogController) request.getSession()
+					.getAttribute("user_log_controller");
+			BookingController booking = (BookingController) request.getSession().getAttribute("booking_controller");
+
+			// Using the necessary objects
+			String userWallet = user.getWallet(id);
+			String userFirstName = user.getFirstName(id);
+			String userEmail = user.getEmail(id);
+			String carPickupLocation = userLog.getCurrentLocation(id);
+			String carPickupTime = userLog.getStartTime(id);
+	%>
+	<!-- Navigation -->
+	<div class="navbar-fixed">
+		<nav class="nav-wrapper indigo darken-3">
+			<div class="container">
+				<a class="sidenav-trigger" href="#" data-target="menu-link"> <i
+					class="material-icons">menu</i>
+				</a>
+				<div class="brand-logo">
+					<a href="#"> RentoCar </a>
+				</div>
+				<ul class="right hide-on-med-and-down">
+					<li><a href="#modalwallet"
+						class="waves-effect waves-light modal-trigger">Wallet</a></li>
+					<li><a href="#booking"
+						class="waves-effect waves-dark dropdown-trigger"
+						data-target="booking_dropdown">Booking</a></li>
+					<!-- Booking Dropdown -->
+					<ul id="booking_dropdown" class="dropdown-content">
+						<li><a href="RentCar.jsp" class="indigo-text">Rent a car</a></li>
+						<li><a href="History.jsp" class="indigo-text">History</a></li>
+					</ul>
+					<li><a href="#username"
+						class="waves-effect waves-dark dropdown-trigger"
+						data-target="account_dropdown"> <i class="material-icons">person_outline</i>
+					</a></li>
+					<!-- Account Dropdown -->
+					<ul id="account_dropdown" class="dropdown-content">
+						<li><a class="indigo-text">Hi <%=userFirstName%></a></li>
+						<li><a href="user_profile" class="indigo-text">Profile</a></li>
+						<li><a href="logout" class="indigo-text">Logout</a></li>
+					</ul>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<!-- Side Navigation for mobile devices -->
+	<ul class="sidenav" id="menu-link">
+		<li>
+			<div class="user-view">
+				<div class="background indigo accent-4"></div>
+				<a href="#user"> <img src="images/user_profile.png"
+					class="circle">
+				</a> <a href="#name"><span class="name white-text"><%=userFirstName%></span></a>
+				<a href="#email"><span class="email white-text"><%=userEmail%></span></a>
+			</div>
+		</li>
+		<li><a href="#modalwallet"
+			class="waves-effect waves-light modal-trigger">Wallet</a></li>
+		<li>
+			<ul class="collapsible" id="collapsibleBooking"
+				style="margin-left: 5%;">
+				<li>
+					<div class="collapsible-header">Booking</div>
+					<div class="collapsible-body">
+						<a href="RentCar.jsp"
+							class="waves-effect waves-light modal-trigger"
+							style="margin-left: 5%;">Rent a Car</a>
+					</div>
+<!-- 					<div class="collapsible-body"> -->
+<!-- 						<a href="CurrentBooking.jsp" -->
+<!-- 							class="waves-effect waves-light modal-trigger" -->
+<!-- 							style="margin-left: 5%;">Current Booking</a> -->
+<!-- 					</div> -->
+					<div class="collapsible-body">
+						<a href="History.jsp"
+							class="waves-effect waves-light modal-trigger"
+							style="margin-left: 5%;">History</a>
+					</div>
+				</li>
+				<!--             <a href="#booking" class="waves-effect waves-dark"></a> -->
+			</ul>
+		</li>
+		<li>
+			<ul class="collapsible" id="collapsibleAccount"
+				style="margin-left: 5%;">
+				<li>
+					<div class="collapsible-header">Account</div>
+					<div class="collapsible-body">
+						<a href="user_profile" class="waves-effect "
+							style="margin-left: 5%;">Profile</a>
+					</div>
+					<div class="collapsible-body">
+						<a href="logout" class="waves-effect " style="margin-left: 5%;">Logout</a>
+					</div> <!-- 					  <li><a href="logout" class="indigo-text">Logout</a></li> -->
+				</li>
+			</ul>
+		</li>
+	</ul>
+<!------Side Navigation ends here----->
 
 
       <div class="container">
@@ -189,5 +261,10 @@
         });
       
       </script>
+	<%
+		} else {
+			response.sendRedirect("Index.jsp");
+		}
+	%>
    </body>
 </html>
