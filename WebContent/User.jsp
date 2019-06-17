@@ -61,7 +61,7 @@
 						data-target="booking_dropdown">Booking</a></li>
 					<!-- Booking Dropdown -->
 					<ul id="booking_dropdown" class="dropdown-content">
-						<li><a href="RentCar.jsp" class="indigo-text">Rent a car</a></li>
+						<li><a href="ChooseCar.jsp" class="indigo-text">Rent a car</a></li>
 <!-- 						<li><a href="CurrentBooking.jsp" class="indigo-text">Current -->
 <!-- 								Booking</a></li> -->
 						<li><a href="History.jsp" class="indigo-text">History</a></li>

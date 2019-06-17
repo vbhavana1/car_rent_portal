@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ page import="com.mysql.cj.Session"%>
 <%@ 
 	page
@@ -26,6 +26,12 @@
 	<%
 		String id = (String) request.getSession().getAttribute("session_id");
 		UserController user = (UserController) request.getSession().getAttribute("user_controller");
+
+		String carid = (String) request.getSession().getAttribute("car_id");
+		String carname = (String) request.getSession().getAttribute("car_name");
+		String cardesc = (String) request.getSession().getAttribute("car_desc");
+		String carmileage = (String) request.getSession().getAttribute("car_mileage");
+		String carimagepath = (String) request.getSession().getAttribute("car_image_path");
 
 		if (id != null && !user.getFirstName(id).equals("")) {
 
@@ -99,12 +105,9 @@
 						<a href="RentCar.jsp"
 							class="waves-effect waves-light modal-trigger"
 							style="margin-left: 5%;">Rent a Car</a>
-					</div>
-<!-- 					<div class="collapsible-body"> -->
-<!-- 						<a href="CurrentBooking.jsp" -->
-<!-- 							class="waves-effect waves-light modal-trigger" -->
-<!-- 							style="margin-left: 5%;">Current Booking</a> -->
-<!-- 					</div> -->
+					</div> <!-- 					<div class="collapsible-body"> --> <!-- 						<a href="CurrentBooking.jsp" -->
+					<!-- 							class="waves-effect waves-light modal-trigger" --> <!-- 							style="margin-left: 5%;">Current Booking</a> -->
+					<!-- 					</div> -->
 					<div class="collapsible-body">
 						<a href="History.jsp"
 							class="waves-effect waves-light modal-trigger"
@@ -130,102 +133,130 @@
 			</ul>
 		</li>
 	</ul>
-<!------Side Navigation ends here----->
+	<!------Side Navigation ends here----->
 
+<!-- Author Dheeraj Joshi -->
+	<div class="container">
+		<h3 class="indigo-text darken-3">Book Car</h3>
 
-      <div class="container">
-            <h3 class="indigo-text darken-3">Book Car</h3>
-         
-          <div class="row"><!-----Displaying Selected car----->
-              <div class="col s4 m4 ">
-                    <div class="card indigo darken-3">
-                        <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator" src="images/car.jpg">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title activator white-text text-darken-4">Redi-GO<i class="material-icons right">more_vert</i></span>
-                            <div class = "card-action">  
-                                <button class = "btn waves-effect waves-light white"> 
-                                <a class = "black-text" href = "home.html">Change your car</a> 
-                                </button>  
-                            </div>
-                        </div>
-                        <div class="card-reveal">
-                            <span class="card-title black-text text-darken-4">Car Information<i class="material-icons right">close</i></span>
-                            <p>22.7kmpl Milage limit, Fuel type-Petrol</p>
-                            <p> It packs a Bluetooth-enabled audio system that offers hands-free calling and music streaming, central locking, manual AC, LED daytime running lights and more. For safety, it gets only ABS with EBD as standard since the driver airbag is limited to the top-spec S variant only. It is white in colour and 4seater.</p>
-                        </div>
-                    </div>
-              </div><!-----Closing the card-------->
+		<div class="row">
+			<!-----Displaying Selected car----->
 
-              <div class="col s8 m8 "><!------Opening the form------->
-                    <div class="booking-form">
-                        <div class="input-field">
-                            <input type="text" id="autocomplete-input" class="autocomplete">
-                            <label for="autocomplete-input black-text darken-3">Origin City</label>
-                          </div>
-                                            
-                          <div class="input-field">
-                            <input type="text" id="autocomplete-input" class="autocomplete">
-                            <label for="autocomplete-input">Delivery City</label>
-                          </div>
+			<div class="card col s12 m7 l4">
+				<div class="card-image waves-effect waves-block waves-light small">
+					<img class="activator" src="images/background.jpg">
+				</div>
+				<div class="card-content">
+					<span class="card-title activator grey-text text-darken-4"><%=carname%><i
+						class="material-icons right">more_vert</i></span>
+						
+						
+						
+				</div>
+				<a href="#" class="btn indigo" style="margin-top:0;margin-bottom:2%;margin-left:0;">Choose Another Car</a>
 
-                        <div>
-                          <div class="input-field col s6">
-                            <input type="text" id="date-picker1" class="validate datepicker">
-                            <label for="date-picker1">Start Date</label>
-                          </div>
+				<div class="card-reveal">
+					<span class="card-title grey-text text-darken-4"><%=carname%><i
+						class="material-icons right">close</i></span>
+					<p><%=cardesc%></p>
+				</div>
+			</div>
+			<!--               <div class="col s5 m4 "> -->
+			<!--                     <div class="card indigo darken-3"> -->
+			<!--                         <div class="card-image waves-effect waves-block waves-light"> -->
+			<%--                             <img class="activator" src="<%=carname %>"> --%>
+			<!--                         </div> -->
+			<!--                         <div class="card-content"> -->
+			<%--                             <span class="card-title activator white-text text-darken-4"><%=carname %><i class="material-icons right">more_vert</i></span> --%>
+			<!--                             <div class = "card-action">   -->
+			<!--                                 <button class = "btn waves-effect waves-light white">  -->
+			<!--                                 <a class = "black-text" href = "home.html">Change your car</a>  -->
+			<!--                                 </button>   -->
+			<!--                             </div> -->
+			<!--                         </div> -->
+			<!--                         <div class="card-reveal"> -->
+			<!--                             <span class="card-title black-text text-darken-4">Car Information<i class="material-icons right">close</i></span> -->
+			<%--                             <p><%=cardesc %></p> --%>
+			<!-- <!--                             <p> It packs a Bluetooth-enabled audio system that offers hands-free calling and music streaming, central locking, manual AC, LED daytime running lights and more. For safety, it gets only ABS with EBD as standard since the driver airbag is limited to the top-spec S variant only. It is white in colour and 4seater.</p> -->
+			<!--                         </div> -->
+			<!--                     </div> -->
+			<!--               </div>---Closing the card------ -->
 
-                          <div class="input-field col s6">
-                            <input type="text" id="time-picker1" class="validate timepicker">
-                            <label for="time-picker1">Start Time</label>
-                          </div>
-                        </div>
+			<div class="col s12 m5 l8 ">				<!------Opening the form------->
+				<div class="booking-form" style="margin-left:4%;">
+					<div class="input-field">
+						<input type="text" id="autocomplete-input" class="autocomplete">
+						<label for="autocomplete-input black-text darken-3">Origin
+							City</label>
+					</div>
 
-                        <div>
-                          <div class="input-field col s6">
-                            <input type="text" id="date-picker2" class="validate datepicker">
-                            <label for="date-picker2">End Date</label>
-                          </div>
+					<div class="input-field">
+						<input type="text" id="autocomplete-input" class="autocomplete">
+						<label for="autocomplete-input">Delivery City</label>
+					</div>
 
-                          <div class="input-field col s6">
-                            <input type="text" id="time-picker2" class="validate timepicker">
-                            <label for="time-picker2">End Time</label>
-                          </div>
-                        </div>
-                        <div>
-                            <h4><p class="Get-Price">Cost:
-                            <label for="Get-Price">Rs </label></p></h4>
-                            <a class="waves-effect waves-light btn indigo darken-3">Proceed to pay</a>
-                        
-                        </div> 
-                        
-                    </div>
-              </div><!-------Closing the form-------->
-          </div>
-      </div>    
+					<div>
+						<div class="input-field col s6">
+							<input type="text" id="date-picker1" class="validate datepicker">
+							<label for="date-picker1">Start Date</label>
+						</div>
 
-      <!----Footer------>
-         <div class="footer-copyright indigo lighten-4" style="padding-top: 20px; padding-bottom: 1px;">
-            <div class="container">
-               <div class="row">
-                  <div class="col">
-                     &copy RentoCar 2018-2019
-                  </div>
-                  <div class="col right">
-                     <a href="#!" class="">Contact Us</a>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </footer>
+						<div class="input-field col s6">
+							<input type="text" id="time-picker1" class="validate timepicker">
+							<label for="time-picker1">Start Time</label>
+						</div>
+					</div>
 
-       <!-- JQuery -->
-      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-      <!-- Compiled and minified JavaScript -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-      <!-- Initializing all the materialize elements -->
-      <script type="text/javascript">
+					<div>
+						<div class="input-field col s6">
+							<input type="text" id="date-picker2" class="validate datepicker">
+							<label for="date-picker2">End Date</label>
+						</div>
+
+						<div class="input-field col s6">
+							<input type="text" id="time-picker2" class="validate timepicker">
+							<label for="time-picker2">End Time</label>
+						</div>
+					</div>
+					<div>
+						<h4>
+							<p class="Get-Price">
+								Cost: <label for="Get-Price">Rs </label>
+							</p>
+						</h4>
+						<a class="waves-effect waves-light btn indigo darken-3">Proceed
+							to pay</a>
+
+					</div>
+
+				</div>
+			</div>
+			<!-------Closing the form-------->
+		</div>
+	</div>
+
+	<!----Footer------>
+	<footer>
+	<div class="footer-copyright indigo lighten-4 "
+		style="padding-top: 20px;">
+		<div class="container">
+			<div class="row">
+				<div class="col">&copy RentoCar 2018-2019</div>
+				<div class="col right">
+					<a href="#!" class="">Contact Us</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	</footer>
+
+	<!-- JQuery -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<!-- Compiled and minified JavaScript -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<!-- Initializing all the materialize elements -->
+	<script type="text/javascript">
          $(document).ready(
           ()=>  {
             // Sidenav initialization
@@ -266,5 +297,5 @@
 			response.sendRedirect("Index.jsp");
 		}
 	%>
-   </body>
+</body>
 </html>
