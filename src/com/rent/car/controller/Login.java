@@ -31,7 +31,7 @@ public class Login extends HttpServlet {
 		// Used for console message
 		System.out.println("[Form gave]: Id: " + id + " password: " + password);
 		
-		response.setContentType("text/html");
+//		response.setContentType("text/html");
 		
 		if((!id.equals("")) && (person.getPassword().equals(request.getParameter("password"))))	{
 			userSession.setAttribute("session_id", id);
@@ -48,7 +48,7 @@ public class Login extends HttpServlet {
 			if(((String) userSession.getAttribute("session_id")).equals("0"))	{
 				request.getRequestDispatcher("AdminPanel.jsp").forward(request, response);
 			}
-			else	{
+			else 	{
 				request.getRequestDispatcher("User.jsp").forward(request, response);
 			}
 		}

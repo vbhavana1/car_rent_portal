@@ -89,7 +89,7 @@
          </div>
       </div>
       <!-- Login modal -->
-      <div class="modal" id="login">
+      <div class="modal one" id="login">
          <form class="form" action="login" method="post">
             <div class="modal-content">
                <div class="">
@@ -103,9 +103,12 @@
                   <input type="password" name="password" id="password" class="validate">
                   <label for="password">Password</label>
                </div>
+               <div id="logindiv" style="color:red;display:none">
+               Login Failed
+               </div>
             </div>
             <div class="modal-footer">
-               <button type="submit" class="btn indigo darken-1 grey-text text-lighten-2 waves-effect waves-dark modal-close" name="submit">
+               <button type="submit" class="btn indigo darken-1 grey-text text-lighten-2 waves-effect waves-dark modal-close" id="loginbutton" name="submit">
                Login
                <i class="material-icons right">send</i>
                </button>
@@ -276,11 +279,46 @@
 
          		// Form initialization
          		$('select').formSelect();
-
          		// $('.datepicker').datepicker();
          		// $('.timepicker').timepicker();
-          	}
-         );        
+          
+         		
+         		
+//          		$("#loginbutton").on("submit", function(){
+                 
+//          			e.preventDefault();
+//          		    $.ajax({url: "login", success: function(result){
+//          		      if(result=="failure"){
+         		    	
+//          		      }
+//          		    }});
+//     })
+         		
+
+	 $("#loginbutton").click(function(e){
+          e.preventDefault();
+          $('#login').show();
+        $.ajax({type: "POST",
+                url: "login",
+                data: { username: $("#username").val(), password: $("#password").val() },
+                success:function(result){
+         if(result=="failure"){
+        	 $('#logindiv').show();
+				$('#login').modal('open');        	 
+        	
+         }
+         else{
+        	 $('#logindiv').hide();
+        	 window.location.href = "User.jsp";
+         }
+        }});
+      });
+         	}
+         	
+         	
+         	
+         );
+     
       </script>
    </body>
 </html>
