@@ -60,8 +60,8 @@
 					<!-- Booking Dropdown -->
 					<ul id="booking_dropdown" class="dropdown-content">
 						<li><a href="RentCar.jsp" class="indigo-text">Rent a car</a></li>
-						<li><a href="CurrentBooking.jsp" class="indigo-text">Current
-								Booking</a></li>
+<!-- 						<li><a href="CurrentBooking.jsp" class="indigo-text">Current -->
+<!-- 								Booking</a></li> -->
 						<li><a href="History.jsp" class="indigo-text">History</a></li>
 					</ul>
 					<li><a href="#username"
@@ -102,11 +102,11 @@
 							class="waves-effect waves-light modal-trigger"
 							style="margin-left: 5%;">Rent a Car</a>
 					</div>
-					<div class="collapsible-body">
-						<a href="CurrentBooking.jsp"
-							class="waves-effect waves-light modal-trigger"
-							style="margin-left: 5%;">Current Booking</a>
-					</div>
+<!-- 					<div class="collapsible-body"> -->
+<!-- 						<a href="CurrentBooking.jsp" -->
+<!-- 							class="waves-effect waves-light modal-trigger" -->
+<!-- 							style="margin-left: 5%;">Current Booking</a> -->
+<!-- 					</div> -->
 					<div class="collapsible-body">
 						<a href="History.jsp"
 							class="waves-effect waves-light modal-trigger"
