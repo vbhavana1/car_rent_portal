@@ -154,4 +154,8 @@ public class UserController implements UserControllerInterface	{
 	public String getId(String uniqueId)	{
 		return this.userModel.getId(uniqueId);
 	}
+	
+	public String getTotalUsers()	{
+		return this.userModel.getTotalUsers();
+	}
 }

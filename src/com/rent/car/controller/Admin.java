@@ -14,7 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 public class Admin extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String userSession = (String) request.getSession().getAttribute("session_id");
+		
+		if(userSession.equals("0"))	{
+			request.getRequestDispatcher("AdminPanel.jsp").forward(request, response);
+		}
+		else	{
+			response.sendRedirect("Index.jsp");
+		}
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

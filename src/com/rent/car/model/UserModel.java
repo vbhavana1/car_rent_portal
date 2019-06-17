@@ -313,4 +313,26 @@ public class UserModel implements UserModelInterface {
 	public boolean isMobilePresent(String mobileNum)	{
 		return this.isPresent(mobileNum, "mobile_num");
 	}
+	
+	public String getTotalUsers()	{
+		String query = "select count(user_id) from user_table";
+		
+		try {
+			UserModel.stmt = this.dbConnection.prepareStatement(query);
+			
+			ResultSet rs = UserModel.stmt.executeQuery();
+			String returnIt = "";
+			
+			while(rs.next())	{
+				returnIt = rs.getString(1);
+			}
+			debug.printMessage("getTotalUsers", "users: " + returnIt);
+			return returnIt;
+		}
+		catch (SQLException e) {
+			debug.printMessage("getTotalUsers", "cannot get the data");
+			e.printStackTrace();
+			return "";
+		}
+	}
 }

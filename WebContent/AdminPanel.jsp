@@ -1,56 +1,98 @@
-
-
+<%@page import="com.mysql.cj.Session"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ 
+	page
+	import="
+		com.rent.car.controller.UserController, 
+		com.rent.car.controller.BookingController, 
+		com.rent.car.controller.UserLogController,
+		com.rent.car.controller.CarController,
+		javax.servlet.http.HttpSession
+	"%>
 <!DOCTYPE html>
 <html>
-   <head>
-      <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!-- Compiled and minified CSS -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-      <title>RentoCar: Rent a car</title>
-      <style media="screen">
-      </style>
-   </head>
-   <body class="indigo lighten-5">
-      <!-- Navigation -->
-      <div class="navbar-fixed">
-         <nav class="nav-wrapper indigo darken-3">
-            <div class="container">
-               <a class="sidenav-trigger" href="#" data-target="menu-link">
-               <i class="material-icons">menu</i>
-               </a>
-               <div class="brand-logo">
-                  <a href="#">
-                  RentoCar
-                  </a>
-               </div>
-               <ul class="right hide-on-med-and-down">
-                  <li>
-                     <a href="#about" class="dropdown-trigger " href='#' data-target='dropdown1'>Hi Akash</a>
-                     <!-- Dropdown Structure -->
-                     <ul id="dropdown1" class='dropdown-content '>
-                        <li><a href="#!" class="indigo-text accent-1"><i class="material-icons">person</i>Account</a></li>
-                        <li><a href="#!" class="indigo-text accent-1"><i class="material-icons">exit_to_app</i>LogOut</a></li>
+<head>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<title>RentoCar: Admin Panel</title>
+</head>
+	<%
+		String id = (String) request.getSession().getAttribute("session_id");
+		UserController user = (UserController) request.getSession().getAttribute("user_controller");
 
-                     </ul>
-                  </li>
-               </ul>
-            </div>
-         </nav>
-      </div>
-      <!-- Side Navigation for mobile devices -->
-      <ul class="sidenav" id="menu-link">
-         <li>
-            <a href="#login" class="waves-effect waves-dark modal-trigger">Login</a>
-         </li>
-         <li>
-            <a href="#register" class="waves-effect waves-dark modal-trigger">Register</a>
-         </li>
-         <li>
-            <a href="#about">About Us</a>
-         </li>
-      </ul>
+		if (id != null && !user.getFirstName(id).equals("")) {
+
+			// Getting the necessary objects from session
+			UserLogController userLog = (UserLogController) request.getSession().getAttribute("user_log_controller");
+			BookingController booking = (BookingController) request.getSession().getAttribute("booking_controller");
+			CarController car = (CarController) request.getSession().getAttribute("car_controller");
+
+			// Using the necessary objects
+			String userFirstName = user.getFirstName(id);
+			String userEmail = user.getEmail(id);
+	%>
+
+   <body class="indigo lighten-5">
+	<!-- Navigation -->
+	<div class="navbar-fixed">
+		<nav class="nav-wrapper indigo darken-3">
+			<div class="container">
+				<a class="sidenav-trigger" href="#" data-target="menu-link"> <i
+					class="material-icons">menu</i>
+				</a>
+				<div class="brand-logo">
+					<a href="#"> RentoCar </a>
+				</div>
+				<ul class="right hide-on-med-and-down">
+					<li><a href="#username"
+						class="waves-effect waves-dark dropdown-trigger"
+						data-target="account_dropdown"> <i class="material-icons">person_outline</i>
+					</a></li>
+					<!-- Account Dropdown -->
+					<ul id="account_dropdown" class="dropdown-content">
+						<li><a class="indigo-text">Hi <%=userFirstName%></a></li>
+						<li><a href="user_profile" class="indigo-text">Profile</a></li>
+						<li><a href="logout" class="indigo-text">Logout</a></li>
+					</ul>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<!-- Side Navigation for mobile devices -->
+	<ul class="sidenav" id="menu-link">
+		<li>
+			<div class="user-view">
+				<div class="background indigo accent-4"></div>
+				<a href="#user"> <img src="images/user_profile.png"
+					class="circle">
+				</a> <a href="#name"><span class="name white-text"><%=userFirstName%></span></a>
+				<a href="#email"><span class="email white-text"><%=userEmail%></span></a>
+			</div>
+		</li>
+		<li>
+			<ul class="collapsible" id="collapsibleAccount"
+				style="margin-left: 5%;">
+				<li>
+					<div class="collapsible-header">Account</div>
+					<div class="collapsible-body">
+						<a href="user_profile" class="waves-effect "
+							style="margin-left: 5%;">Profile</a>
+					</div>
+					<div class="collapsible-body">
+						<a href="logout" class="waves-effect " style="margin-left: 5%;">Logout</a>
+					</div> <!-- 					  <li><a href="logout" class="indigo-text">Logout</a></li> -->
+				</li>
+			</ul>
+		</li>
+	</ul>
+
       <!-- tabs starting here-->
       <div class="row">
          <div class="col s12">
@@ -837,4 +879,9 @@
 
       </script>
    </body>
+   	<%
+		} else {
+			response.sendRedirect("Index.jsp");
+		}
+	%>
 </html>

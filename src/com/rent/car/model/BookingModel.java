@@ -185,4 +185,26 @@ public class BookingModel implements BookingModelInterface {
 			return false;
 		}
 	}
+	
+	public String getCurrentBookedCars()	{
+		String query = "select count(car_no) from car_status where status=booked";
+		
+		try {
+			BookingModel.stmt = this.dbConnection.prepareStatement(query);
+			
+			ResultSet rs = BookingModel.stmt.executeQuery();
+			String returnIt = "";
+			
+			while(rs.next())	{
+			returnIt = rs.getString(1);
+			}
+			debug.printMessage("getCurrentBookedCars", "booked cars: " + returnIt);
+			return returnIt;
+		}
+		catch (SQLException e) {
+			debug.printMessage("getCurrentBookedCars", "cannot get the data");
+			e.printStackTrace();
+			return "";
+		}
+	}
 }

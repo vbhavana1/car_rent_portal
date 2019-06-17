@@ -66,4 +66,8 @@ public class BookingController implements BookingControllerInterface	{
 	public boolean deleteBooking(String id)	{
 		return this.bookingModel.deleteBooking(id);
 	}
+	
+	public String getCurrentBookedCars()	{
+		return this.bookingModel.getCurrentBookedCars();
+	}
 }
