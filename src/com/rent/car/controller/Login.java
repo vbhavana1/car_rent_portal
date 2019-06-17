@@ -45,11 +45,15 @@ public class Login extends HttpServlet {
 			//Moving to the login page
 			//response.getWriter().append("success");
 			
-			if(((String) userSession.getAttribute("session_id")).equals("0"))	{
-				request.getRequestDispatcher("AdminPanel.jsp").forward(request, response);
+			if(id.equals("0"))	{
+				response.getWriter().append("admin_success");
+				// Move to admin page
+				//request.getRequestDispatcher("AdminPanel.jsp").forward(request, response);
 			}
 			else 	{
-				request.getRequestDispatcher("User.jsp").forward(request, response);
+				response.getWriter().append("user_success");
+				// Move to normal user page
+				//request.getRequestDispatcher("User.jsp").forward(request, response);
 			}
 		}
 		else	{
