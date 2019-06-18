@@ -182,6 +182,9 @@
 			<!--                     </div> -->
 			<!--               </div>---Closing the card------ -->
 
+	
+	
+	
 			<div class="col s12 m5 l8 ">				<!------Opening the form------->
 				<div class="booking-form" style="margin-left:4%;">
 					<div class="input-field">
@@ -278,6 +281,7 @@
                 }
 
          );
+         <!-- Author Dheeraj Joshi-->
          //User profile Drop down
          $(".dropdown-trigger").dropdown();
 

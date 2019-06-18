@@ -185,7 +185,7 @@
 						<div class="card-content white-text">
 							<h4>Recent Booking</h4>
 							<%
-								if (userLog.isUserIdPresent(id) && ) {
+								if (userLog.isUserIdPresent(id)  ) {
 							%>
 							<p>
 								Pick up your car from <b><%=carPickupLocation%></b> at <b><%=carPickupTime%></b>
@@ -298,9 +298,8 @@
          		// Sidenav initialization
             	$('.sidenav').sidenav();
 
-         		// Slider initialization and params setting
-         		$('.slider').slider(
-         			{
+         		// Slider initialization and params 
+         		$('.slider').slider({
          				indicators: false,
          				height: 450,
          				interval: 3000

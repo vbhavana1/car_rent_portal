@@ -219,16 +219,16 @@ public class CarModel implements CarModelInterface	{
 	public String[] getCarIds(String carType)	{
 		String query;
 		if(carType.equals("mini"))	{
-			query = "select car_id from car_table where car_type=mini";
+			query = "select car_id from car_table where car_type='mini'";
 		}
 		else if(carType.equals("micro"))	{
-			query = "select car_id from car_table where car_type=micro";
+			query = "select car_id from car_table where car_type='micro'";
 		}
 		else if(carType.equals("deluxe"))	{
-			query = "select car_id from car_table where car_type=deluxe";
+			query = "select car_id from car_table where car_type='deluxe'";
 		}
 		else if(carType.equals("suv"))	{
-			query = "select car_id from car_table where car_type=suv";
+			query = "select car_id from car_table where car_type='suv'";
 		}
 		else	{
 			query = "select car_id from car_table";

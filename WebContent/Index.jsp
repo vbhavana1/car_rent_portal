@@ -261,7 +261,7 @@
       <!-- Initializing all the materialize elements -->
       <script type="text/javascript">
          $(document).ready(
-         	()=>	{
+         	()=>{
          		// Sidenav initialization
             	$('.sidenav').sidenav();
 
