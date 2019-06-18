@@ -304,10 +304,13 @@
                 success:function(result){
          if(result=="failure"){
         	 $('#logindiv').show();
-				$('#login').modal('open');        	 
-        	
+        	 $('#login').modal('open');
          }
-         else{
+          else if(result=="admin_success")	{
+        	  $('#logindiv').hide();
+        	  window.location.href = "AdminPanel.jsp";
+         }
+         else if(result=="user_success"){
         	 $('#logindiv').hide();
         	 window.location.href = "User.jsp";
          }
