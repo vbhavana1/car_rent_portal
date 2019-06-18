@@ -240,39 +240,6 @@
             </div>
          </div>
       </div>
-      
-      		<!-- Modal Structure  [Author: Dheeeraj Joshi]-->
-		<div id="modalwallet" class="modal">
-			<form class="form" action="addwallet" method="post">
-				<div class="row container" style="margin-top: 2%;">
-					<div class="col s12">
-						<div class="modal-content">
-							<h4>Add Money</h4>
-						</div>
-					</div>
-				</div>
-				<div class="row container">
-					<div class="col s6 l8">
-						<div class="input-field ">
-
-							<input id="amount" name="amount" type="text" class="validate">
-							<label for="money">Enter Amount </label>
-						</div>
-					</div>
-					<div class="col s6 l4">
-						<div class="modal-footer">
-
-							<button type="submit"
-								class="modal-close waves-effect waves-indigo btn left indigo "
-								onclick="M.toast({html: 'Money added!'})"
-								style="margin-left: 2%;">Add Money</button>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-      
       <footer>
          <div class="footer-copyright indigo lighten-4" style="padding-top: 20px; padding-bottom: 1px;">
             <div class="container">
@@ -331,26 +298,20 @@
 	 $("#loginbutton").click(function(e){
           e.preventDefault();
           $('#login').show();
-        $.ajax({
-        		type: "POST",
+        $.ajax({type: "POST",
                 url: "login",
                 data: { username: $("#username").val(), password: $("#password").val() },
                 success:function(result){
-                	console.log(result);
-         			if(result == "failure"){
-        	 			$('#logindiv').show();
-        	 			$('#login').modal('open');        	 	
-         			}
-         			else if(result == "admin_success")	{
-        	 			$('#logindiv').hide();
-        	 			window.location.href="AdminPanel.jsp";
-         			}
-         			else if(result == "user_success")	{
-        	 			$('#logindiv').hide();
-        	 			window.location.href = "User.jsp";
-         			}
-        		}
-                });
+         if(result=="failure"){
+        	 $('#logindiv').show();
+				$('#login').modal('open');        	 
+        	
+         }
+         else{
+        	 $('#logindiv').hide();
+        	 window.location.href = "User.jsp";
+         }
+        }});
       });
          	}
          	
