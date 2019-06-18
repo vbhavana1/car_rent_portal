@@ -341,7 +341,7 @@ console.log("got it");
      	                success:function(result){ $.each(result, function(index, element) {
  console.log("got it");
      	                
-     	                		  var newcar=   $('<div class="col s12 m6 l3"><div class="card amber lighten-5 z-depth-3 card-style"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src="images"'+element.img_path+'></div><div class="card-content"><span class="card-title activator grey-text text-darken-4">'+element.name+'<i class="material-icons right">more_vert</i></span></div><div class="card-reveal indigo lighten-3"><span class="card-title grey-text text-darken-4">'+element.carname+'<i class="material-icons right">close</i></span><p>Affordable, distance and power in a mini package. Good for long distance travel purposes.</p></div></div></div>');
+     	                		  var newcar=   $('<div class="col s12 m6 l3"><div class="card amber lighten-5 z-depth-3 card-style"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src='+element.img_path+'></div><div class="card-content"><span class="card-title activator grey-text text-darken-4">'+element.name+'<i class="material-icons right">more_vert</i></span></div><div class="card-reveal indigo lighten-3"><span class="card-title grey-text text-darken-4">'+element.carname+'<i class="material-icons right">close</i></span><p>Affordable, distance and power in a mini package. Good for long distance travel purposes.</p></div></div></div>');
      	                		 $('#dynamicrow').append(newcar); 
      	                
      	                })}});
