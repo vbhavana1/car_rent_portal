@@ -24,7 +24,7 @@ public class ContextListener implements ServletContextListener, ServletContextAt
 			String timeZoneCorrection = "?serverTimezone=" + TimeZone.getDefault().getID();
 			
 			debug.printMessage("createConnection", "opening the database connection at port: " + port);
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			ContextListener.dbConnection = DriverManager.getConnection("jdbc:mysql://localhost:" + port + "/" + dbName + timeZoneCorrection, userName, password);
 			return ContextListener.dbConnection;
 		}

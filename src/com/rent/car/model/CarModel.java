@@ -216,6 +216,47 @@ public class CarModel implements CarModelInterface	{
 		else	return new Car();
 	}
 	
+	public String[] getCarIds(String carType)	{
+		String query;
+		if(carType.equals("mini"))	{
+			query = "select car_id from car_table where car_type=mini";
+		}
+		else if(carType.equals("micro"))	{
+			query = "select car_id from car_table where car_type=micro";
+		}
+		else if(carType.equals("deluxe"))	{
+			query = "select car_id from car_table where car_type=deluxe";
+		}
+		else if(carType.equals("suv"))	{
+			query = "select car_id from car_table where car_type=suv";
+		}
+		else	{
+			query = "select car_id from car_table";
+		}
+		
+		try	{
+			CarModel.stmt = this.dbConnection.prepareStatement(query);
+			
+			ResultSet rs = CarModel.stmt.executeQuery();
+			
+			String ids = "";
+			
+			while(rs.next())	{
+				ids += rs.getString(1) + ",";
+			}
+			
+			debug.printMessage("getCarIds", "car_ids:" + ids);
+			return ids.substring(0, ids.length()-1).split(",");
+		}
+		catch(SQLException e)	{
+			debug.printMessage("getCarIds", "cannot fetch id");
+			
+			String arr[] = new String[1];
+			arr[0] = "";
+			return arr;
+		}
+	}
+	
 	public boolean deleteCar(String id)	{
 		String query = "delete from car_table where car_id=? limit 1";
 		

@@ -27,7 +27,6 @@
 		UserController user = (UserController) request.getSession().getAttribute("user_controller");
 
 		if (id != null && !user.getFirstName(id).equals("")) {
-
 			// Getting the necessary objects from session
 			UserLogController userLog = (UserLogController) request.getSession().getAttribute("user_log_controller");
 			BookingController booking = (BookingController) request.getSession().getAttribute("booking_controller");

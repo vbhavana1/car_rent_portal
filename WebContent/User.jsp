@@ -315,16 +315,12 @@
 
          		// $('.datepicker').datepicker();
          		// $('.timepicker').timepicker();
-          	
-         		 $('.modal').modal();
+         		$('.modal').modal();
          		 
-         		 //sidenav collapsible initialization
+         		//sidenav collapsible initialization
          		
-         		    $('#collapsibleBooking').collapsible();
-         		  
-         		 
-         		
-         		    $('#collapsibleAccount').collapsible();
+         		$('#collapsibleBooking').collapsible();
+         		$('#collapsibleAccount').collapsible();
          		 
          	}
          	

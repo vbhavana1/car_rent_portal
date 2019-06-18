@@ -110,4 +110,8 @@ public class CarController implements CarControllerInterface	{
 	public boolean deleteCar(String id)	{
 		return this.carModel.deleteCar(id);
 	}
+	
+	public String[] getCarIds(String carType)	{	// Leave this null for all cars
+		return this.carModel.getCarIds(carType);	
+	}
 }

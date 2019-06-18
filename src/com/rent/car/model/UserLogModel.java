@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.rent.car.bean.Person;
 import com.rent.car.bean.UserLog;
 //import com.rent.car.controller.ContextListener;
 import com.rent.car.helper.Debug;
@@ -263,5 +264,54 @@ public class UserLogModel implements UserLogModelInterface	{
 		}
 		else	return new UserLog();
 	}
-
+	
+	public UserLog[] getUserHistory(String id) {
+		String query = "select * from users_log where user_id=?";
+		
+		try {
+			UserLogModel.stmt = this.dbConnection.prepareStatement(query);
+			UserLogModel.stmt.setString(1, id);
+			
+			ResultSet rs = UserLogModel.stmt.executeQuery();
+			String returnIt = "";
+			
+			while(rs.next())	{
+				for(int i=2; i<=10; ++i)	{
+					if(i != 10)	{
+						returnIt += rs.getString(i) + "#";
+					}
+					else	{
+						returnIt += rs.getString(i);
+					}
+				}
+				returnIt += "$";
+			}
+			
+			String[] rows = returnIt.split("$");
+			UserLog[] log = new UserLog[rows.length];
+			
+			for(int i=0; i<rows.length; ++i)	{
+				String[] details = rows[i].split("#");
+				
+				log[i].setStartTime(details[0]);
+				log[i].setEndTime(details[1]);
+				log[i].setDeliveredTime(details[2]);
+				log[i].setCurrentLocation(details[3]);
+				log[i].setDropLocation(details[4]);
+				log[i].setMessage(details[5]);
+				log[i].setTotalAmount(details[6]);
+				log[i].setPaidAmount(details[7]);
+				log[i].setSecretKey(details[8]);
+				
+				debug.printMessage("getUserHistory", "detail: " + details);
+			}
+			
+			return log;
+		}
+		catch (SQLException e) {
+			debug.printMessage("get", "cannot get the data");
+			e.printStackTrace();
+			return new UserLog[1];
+		}
+	}
 }

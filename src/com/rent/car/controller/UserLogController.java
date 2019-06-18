@@ -129,4 +129,8 @@ public class UserLogController implements UserLogControllerInterface	{
 	public UserLog getUserLog(String id)	{
 		return this.userLogModel.getUserLog(id);
 	}
+	
+	public UserLog[] getUserHistory(String id)	{
+		return this.userLogModel.getUserHistory(id);
+	}
 }
