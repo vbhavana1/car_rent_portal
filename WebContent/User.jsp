@@ -103,7 +103,7 @@
 				<li>
 					<div class="collapsible-header">Booking</div>
 					<div class="collapsible-body">
-						<a href="RentCar.jsp"
+						<a href="ChooseCar.jsp"
 							class="waves-effect waves-light modal-trigger"
 							style="margin-left: 5%;">Rent a Car</a>
 					</div>
