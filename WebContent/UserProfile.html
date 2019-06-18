@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <title>RentoCar: Rent a car</title>
+      <style media="screen">
+         .card-style{
+         	height: 56.25%;
+         	width: 99.5%;
+         }
+      </style>
+	  
+   </head>
+   <body class="indigo lighten-5">
+      <!-- Navigation -->
+      <div class="navbar-fixed">
+         <nav class="nav-wrapper indigo darken-3">
+            <div class="container">
+               <a class="sidenav-trigger" href="#" data-target="menu-link">
+               <i class="material-icons">menu</i>
+               </a>
+               <div class="brand-logo">
+                  <a href="#">
+                  RentoCar
+                  </a>
+               </div>
+               <ul class="right hide-on-med-and-down">
+                  <li>
+                     <a href="#logout" class="waves-effect waves-dark modal-trigger">Logout</a>
+                  </li>
+                 
+               </ul>
+            </div>
+         </nav>
+      </div>
+      <!-- Side Navigation for mobile devices -->
+      <ul class="sidenav" id="menu-link">
+         <li>
+            <a href="#logout" class="waves-effect waves-dark modal-trigger">Logout</a>
+         </li>
+        
+      </ul><!---Side navigation ends here---->
+      <div class="row">
+
+        <div class="col s12 m6">
+         
+         <div class="card">
+           <span class="card-title">My Account</span>
+           <div class="row">
+            <div class="col s6 m7 l6">
+               <img src="images/profile.jpg">
+            </div>
+            <div class="col s6 m8 l6">
+               <h5>V Bhavana</h5>
+                <p>Mobile No:   <span>123-123-1234</span></p>
+                <p>Email Id :   <span>bhavana9999@gmail.com</span></p>
+                <p>UID Number:  <span>534623490998</span></p>
+                <p>Wallet Amount:  <span></span></p>
+            </div>
+             
+           </div>
+         </div>
+           <div class="card"><!--change user name and password -->
+              <span class="card-title brown-text">Customize Credentials</span>
+                <form id="updatecredentialform" action="form" method="">
+                  
+                  <div class="input-field">
+                  <i class="material-icons indigo-text prefix">contacts</i>
+                   <input   type="text" name="ChangeUserName">
+                   <label for="ChangeUserName">User Name</label>
+                 
+                  </div>
+                 
+                  <div class="input-field">
+                  <i class="material-icons indigo-text prefix">clear</i>
+                   <input   type="text" name="ChangePassword" id="ChangePassword">
+                   <label for="ChangePassword">Old Password</label>
+                
+                  </div>
+                   <div class="input-field">
+                  <i class="material-icons indigo-text prefix">clear</i>
+                   <input   type="text" name="ChangePassword" id="ChangePassword">
+                   <label for="ChangePassword">New Password</label>
+                
+                  </div>
+
+               <center> <input type = "Submit" class="waves-effect waves-light btn indigo" value="Update"></center>
+               <br>
+
+
+                </form>
+              
+             </div>
+          
+        </div>
+
+        <div class="col s12 m6">
+          <div class="card">
+            <div class="card-content">
+
+              <span class="card-title">Update Account Details</span>
+              <form id="updateform" action="" method="post">
+            
+                <div class="input-field">
+                 <i class="material-icons indigo-text prefix">contact_mail</i>
+                   <input  id="email" type="text" name="">
+                   <label for="updateEmail">Update Email</label>
+                 </div>
+             
+                <div class="input-field">
+                 <i class="material-icons indigo-text prefix">call</i>
+                   <input  id="updateMobile" type="text" name="">
+                   <label for="updateMobile">Update Telephone</label>
+                 </div>
+             
+                <div class="input-field">
+                 <i class="material-icons indigo-text prefix">create</i>
+                   <input  id="" type="text" name="">
+                   <label for="changeUidno">Change Uid No</label>
+                 </div>
+             
+                <div class="input-field file-field">
+                  <div class="btn indigo">
+                    <input type="file" name="" id="">
+                    Change gov id
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input type="text" class="file-path" >
+                  </div>
+                </div>
+              
+              <center> <input type = "Submit" class="waves-effect waves-light btn indigo" value="Update"></center>
+             
+            </form>
+             </div>
+              <div class="card-action">
+            <div class="btn indigo lighten-5 ">
+              
+                 <i class="material-icons red-text prefix">delete</i>
+                <a href="#" class="right black-text">Delete Account</a>
+               
+              </div>
+           </div>
+           </div>
+          
+         </div>
+        </div>
+
+      <footer>
+         <div class="footer-copyright indigo lighten-4" style="padding-top: 20px; padding-bottom: 1px;">
+            <div class="container">
+               <div class="row">
+                  <div class="col">
+                     &copy RentoCar 2018-2019
+                  </div>
+                  <div class="col right">
+                     <a href="#!" class="">Contact Us</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- JQuery -->
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      
+
+      <!-- Initializing all the materialize elements -->
+      <script type="text/javascript">
+         $(document).ready(
+         	()=>	{
+         		// Sidenav initialization
+            				$('.sidenav').sidenav();
+         		// Slider initialization and params setting
+         		$('.slider').slider(
+         			{
+         				indicators: false,
+         				height: 450,
+         				interval: 3000
+         			}
+         		);
+         		// Modal initialization
+         		$('.modal').modal();
+         		// Form initialization
+         		$('select').formSelect();
+         		// $('.datepicker').datepicker();
+         		// $('.timepicker').timepicker();
+          			}
+         );
+      </script>
+	  <script type="text/javascript">
+     
+    </script>
+   </body>
+</html>
