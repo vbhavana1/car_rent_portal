@@ -8,7 +8,9 @@
 		com.rent.car.controller.BookingController, 
 		com.rent.car.controller.UserLogController,
 		com.rent.car.controller.CarController,
-		javax.servlet.http.HttpSession
+		javax.servlet.http.HttpSession,
+		java.util.Date,
+		java.text.SimpleDateFormat
 	"%>
 <!DOCTYPE html>
 <html>
@@ -42,6 +44,7 @@
 			String carPickupLocation = userLog.getCurrentLocation(id);
 			String carPickupTime = userLog.getStartTime(id);
 			String carSecretKey = userLog.getSecretKey(id);
+			//String currentDate = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date());
 	%>
 	<!-- Navigation -->
 	<div class="navbar-fixed">
@@ -180,9 +183,9 @@
 					</div>
 					<div class="col s9">
 						<div class="card-content white-text">
-							<h4>Booking</h4>
+							<h4>Recent Booking</h4>
 							<%
-								if (userLog.isUserIdPresent(id)) {
+								if (userLog.isUserIdPresent(id) && ) {
 							%>
 							<p>
 								Pick up your car from <b><%=carPickupLocation%></b> at <b><%=carPickupTime%></b>
