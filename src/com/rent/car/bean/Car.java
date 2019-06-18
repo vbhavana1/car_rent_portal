@@ -87,14 +87,14 @@ public class Car {
 	@Override
 	public String toString()	{
 		return "{" + 
-					"id: " + this.id + "," +
-					"name: " + this.name + "," +
-					"type: " + this.type + "," +
-					"mileage: " + this.mileage + "," +
-					"seats: " + this.seats + "," +
-					"cost: " + this.cost + "," +
-					"description: " + this.description + "," +
-					"img_path: " + this.imgPath
+					"\"id\": " + this.id + "," +
+					"\"name\": \"" + this.name + "\"," +
+					"\"type\": \"" + this.type + "\"," +
+					"\"mileage\": " + this.mileage + "," +
+					"\"seats\": " + this.seats + "," +
+					"\"cost\": " + this.cost + "," +
+					"\"description\": \"" + this.description + "\"," +
+					"\"img_path\": \"" + this.imgPath + "\""
 				+
 				"}";
 	}

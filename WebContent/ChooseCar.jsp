@@ -22,18 +22,14 @@
 <title>RentoCar: Choose Car</title>
 </head>
 <body>
-
 	<%
 		String id = (String) request.getSession().getAttribute("session_id");
 		UserController user = (UserController) request.getSession().getAttribute("user_controller");
-
 		if (id != null && !user.getFirstName(id).equals("")) {
-
 			// Getting the necessary objects from session
 			UserLogController userLog = (UserLogController) request.getSession()
 					.getAttribute("user_log_controller");
 			BookingController booking = (BookingController) request.getSession().getAttribute("booking_controller");
-
 			// Using the necessary objects
 			String userWallet = user.getWallet(id);
 			String userFirstName = user.getFirstName(id);
@@ -135,17 +131,17 @@
 	</ul>
 
      <div class="row">
-         <div class="col s12 m6 l3">
+         <div class="col s12 m6 l3 ">
             <div class="card amber lighten-5 z-depth-3 card-style">
                <div class="card-image waves-effect waves-block waves-light">
                   <img class="activator" src="images/mini_car.jpg">
                </div>
                <div class="card-content">
                   <span class="card-title activator grey-text text-darken-4">Mini Cars<i class="material-icons right">more_vert</i></span>
-                  <p><a href="#">See all Mini cars</a></p>
+                  <p><a href="#" class="minicar">See all Mini cars</a></p>
                </div>
                <div class="card-reveal indigo lighten-3">
-                  <span class="card-title grey-text text-darken-4">Mini Cars<i class="material-icons right">close</i></span>
+                  <span class="card-title grey-text text-darken-4 mininame">mini<i class="material-icons right">close</i></span>
                   <p>Affordable, distance and power in a mini package. Good for long distance travel purposes.</p>
                </div>
             </div>
@@ -157,10 +153,10 @@
                </div>
                <div class="card-content">
                   <span class="card-title activator grey-text text-darken-4">Micro Cars<i class="material-icons right">more_vert</i></span>
-                  <p><a href="#">See all Micro cars</a></p>
+                  <p><a href="#" class="microcar">See all Micro cars</a></p>
                </div>
                <div class="card-reveal indigo lighten-3">
-                  <span class="card-title grey-text text-darken-4">Micro Cars<i class="material-icons right">close</i></span>
+                  <span class="card-title grey-text text-darken-4 microname">micro<i class="material-icons right">close</i></span>
                   <p>Affordable, distance with more power and more seats. Good for long distance travel purpose and extra comfortable.</p>
                </div>
             </div>
@@ -172,10 +168,10 @@
                </div>
                <div class="card-content">
                   <span class="card-title activator grey-text text-darken-4">Deluxe Cars<i class="material-icons right">more_vert</i></span>
-                  <p><a href="#">See all Deluxe cars</a></p>
+                  <p><a href="#" class="deluxecar">See all Deluxe cars</a></p>
                </div>
                <div class="card-reveal indigo lighten-3">
-                  <span class="card-title grey-text text-darken-4">Deluxe Cars<i class="material-icons right">close</i></span>
+                  <span class="card-title grey-text text-darken-4 deluxename">deluxe<i class="material-icons right">close</i></span>
                   <p>Expensive, classy cars for those who prefer on looks. Good for short distance rides.</p>
                </div>
             </div>
@@ -187,15 +183,27 @@
                </div>
                <div class="card-content">
                   <span class="card-title activator grey-text text-darken-4">SUV Cars<i class="material-icons right">more_vert</i></span>
-                  <p><a href="#">See all SUV cars</a></p>
+                  <p><a href="#" class="suvcar">See all SUV cars</a></p>
                </div>
                <div class="card-reveal indigo lighten-3">
-                  <span class="card-title grey-text text-darken-4">SUV Cars<i class="material-icons right">close</i></span>
+                  <span class="card-title grey-text text-darken-4 " id="suv">suv<i class="material-icons right">close</i></span>
                   <p>For those who likes to ride power. When you need space, power and comfort at one place.</p>
                </div>
             </div>
          </div>
       </div>
+      
+      
+     
+      
+      
+      
+      <div class="row" id="dynamicrow">
+      
+      
+      </div>
+      
+      
       <footer>
          <div class="footer-copyright indigo lighten-4" style="padding-top: 20px; padding-bottom: 1px;">
             <div class="container">
@@ -221,7 +229,6 @@
          	()=>	{
          		// Sidenav initialization
             	$('.sidenav').sidenav();
-
          		// Slider initialization and params setting
          		$('.slider').slider(
          			{
@@ -230,16 +237,12 @@
          				interval: 3000
          			}
          		);
-
 				//Dropdown initialization
 				$('.dropdown-trigger').dropdown();
-
          		// Modal initialization
          		$('.modal').modal();
-
          		// Form initialization
          		$('select').formSelect();
-
          		// $('.datepicker').datepicker();
          		// $('.timepicker').timepicker();
           	
@@ -247,9 +250,106 @@
          		 $('#collapsibleBooking').collapsible();
          		 $('#collapsibleAccount').collapsible();
          		 
-         	}
          	
-         );
+         	<!-- Author Dheeraj Joshi-->
+         	
+         		 $(".minicar").click(function(e){
+         	          e.preventDefault();
+         	         $('#dynamicrow').empty();
+         	        var carhead=$('<h4>Mini Cars</h4>');    	          
+         	       $('#dynamicrow').append(carhead);
+         	        $.ajax({type: "POST",
+         	                url: "getcar",
+         	               dataType: 'json',
+         	                data: { carname: "mini"},
+         	                success:function(result){ $.each(result, function(index, element) {
+     console.log("got it");
+         	          
+     
+     
+         	                
+         	                		  var newcar=   $('<div class="col s12 m6 l3"><div class="card amber lighten-5 z-depth-3 card-style"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src="images"'+element.img_path+'></div><div class="card-content"><span class="card-title activator grey-text text-darken-4">'+element.name+'<i class="material-icons right">more_vert</i></span></div><div class="card-reveal indigo lighten-3"><span class="card-title grey-text text-darken-4">'+element.carname+'<i class="material-icons right">close</i></span><p>Affordable, distance and power in a mini package. Good for long distance travel purposes.</p></div></div></div>');
+         	                		
+         	                		  $('#dynamicrow').append(newcar); 
+         	                
+         	                })}});
+         	                 	      });
+         	                 	
+         	                
+         	
+         		 
+
+         		 $(".microcar").click(function(e){
+         	          e.preventDefault();
+         	         $('#dynamicrow').empty();
+         	        var carhead=$('<h4>Micro Cars</h4>');    	          
+          	       $('#dynamicrow').append(carhead);
+         	          
+         	        $.ajax({type: "POST",
+         	                url: "getcar",
+         	               dataType: 'json',
+         	                data: { carname:"micro"},
+         	                success:function(result){ $.each(result, function(index, element) {
+     console.log("got it");
+         	          
+         	                
+         	                		  var newcar=   $('<div class="col s12 m6 l3"><div class="card amber lighten-5 z-depth-3 card-style"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src="images"'+element.img_path+'></div><div class="card-content"><span class="card-title activator grey-text text-darken-4">'+element.name+'<i class="material-icons right">more_vert</i></span></div><div class="card-reveal indigo lighten-3"><span class="card-title grey-text text-darken-4">'+element.carname+'<i class="material-icons right">close</i></span><p>Affordable, distance and power in a mini package. Good for long distance travel purposes.</p></div></div></div>');
+         	                		 $('#dynamicrow').append(newcar); 
+         	                
+         	                })}});
+         	                 	      });
+         	                 	
+         		 
+         		 
+         	               
+         	                	
+         	                   	
+         	
+         	
+
+    		 $(".deluxecar").click(function(e){
+    	          e.preventDefault();
+    	          $('#dynamicrow').empty();
+    	          var carhead=$('<h4>Deluxe Cars</h4>');    	          
+        	       $('#dynamicrow').append(carhead);
+    	        $.ajax({type: "POST",
+    	                url: "getcar",
+    	               dataType: 'json',
+    	                data: { carname: "deluxe"},
+    	                success:function(result){ $.each(result, function(index, element) {
+console.log("got it");
+    	          
+    	                
+    	                		  var newcar=   $('<div class="col s12 m6 l3"><div class="card amber lighten-5 z-depth-3 card-style"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src="images"'+element.img_path+'></div><div class="card-content"><span class="card-title activator grey-text text-darken-4">'+element.name+'<i class="material-icons right">more_vert</i></span></div><div class="card-reveal indigo lighten-3"><span class="card-title grey-text text-darken-4">'+element.carname+'<i class="material-icons right">close</i></span><p>Affordable, distance and power in a mini package. Good for long distance travel purposes.</p></div></div></div>');
+    	                		 $('#dynamicrow').append(newcar); 
+    	                
+    	                })}});
+    	                 	      });
+    	                 	
+         	
+		
+
+     		 $(".suvcar").click(function(e){
+     	          e.preventDefault();
+     	         $('#dynamicrow').empty();
+     	        var carhead=$('<h4>Suv Cars</h4>');    	          
+      	       $('#dynamicrow').append(carhead);
+     	        $.ajax({type: "POST",
+     	                url: "getcar",
+     	               dataType: 'json',
+     	                data: { carname: "suv"},
+     	                success:function(result){ $.each(result, function(index, element) {
+ console.log("got it");
+     	                
+     	                		  var newcar=   $('<div class="col s12 m6 l3"><div class="card amber lighten-5 z-depth-3 card-style"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src="images"'+element.img_path+'></div><div class="card-content"><span class="card-title activator grey-text text-darken-4">'+element.name+'<i class="material-icons right">more_vert</i></span></div><div class="card-reveal indigo lighten-3"><span class="card-title grey-text text-darken-4">'+element.carname+'<i class="material-icons right">close</i></span><p>Affordable, distance and power in a mini package. Good for long distance travel purposes.</p></div></div></div>');
+     	                		 $('#dynamicrow').append(newcar); 
+     	                
+     	                })}});
+     	                 	      });
+     		 
+         	
+         	
+         	} );
       </script>
 
 	<%
