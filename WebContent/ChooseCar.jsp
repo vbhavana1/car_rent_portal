@@ -49,14 +49,14 @@
 					<a href="#"> RentoCar </a>
 				</div>
 				<ul class="right hide-on-med-and-down">
-					<li><a href="#modalwallet"
-						class="waves-effect waves-light modal-trigger">Wallet</a></li>
+<!-- 					<li><a href="#modalwallet" -->
+<!-- 						class="waves-effect waves-light modal-trigger">Wallet</a></li> -->
 					<li><a href="#booking"
 						class="waves-effect waves-dark dropdown-trigger"
 						data-target="booking_dropdown">Booking</a></li>
 					<!-- Booking Dropdown -->
 					<ul id="booking_dropdown" class="dropdown-content">
-						<li><a href="RentCar.jsp" class="indigo-text">Rent a car</a></li>
+						<li><a href="ChooseCar.jsp" class="indigo-text">Refresh</a></li>
 <!-- 						<li><a href="CurrentBooking.jsp" class="indigo-text">Current -->
 <!-- 								Booking</a></li> -->
 						<li><a href="History.jsp" class="indigo-text">History</a></li>
@@ -87,17 +87,17 @@
 				<a href="#email"><span class="email white-text"><%=userEmail%></span></a>
 			</div>
 		</li>
-		<li><a href="#modalwallet"
-			class="waves-effect waves-light modal-trigger">Wallet</a></li>
+<!-- 		<li><a href="#modalwallet" -->
+<!-- 			class="waves-effect waves-light modal-trigger">Wallet</a></li> -->
 		<li>
 			<ul class="collapsible" id="collapsibleBooking"
 				style="margin-left: 5%;">
 				<li>
 					<div class="collapsible-header">Booking</div>
 					<div class="collapsible-body">
-						<a href="RentCar.jsp"
+						<a href="ChooseCar.jsp"
 							class="waves-effect waves-light modal-trigger"
-							style="margin-left: 5%;">Rent a Car</a>
+							style="margin-left: 5%;">Refresh</a>
 					</div>
 <!-- 					<div class="collapsible-body"> -->
 <!-- 						<a href="CurrentBooking.jsp" -->
@@ -252,7 +252,6 @@
          		 
          	
          	<!-- Author Dheeraj Joshi-->
-         	
          		 $(".minicar").click(function(e){
          	          e.preventDefault();
          	         $('#dynamicrow').empty();
