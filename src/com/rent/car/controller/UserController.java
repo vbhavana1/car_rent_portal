@@ -1,139 +1,161 @@
 package com.rent.car.controller;
 
+import java.sql.Connection;
+
 import com.rent.car.bean.Person;
 import com.rent.car.model.UserModel;
 
 public class UserController implements UserControllerInterface	{
-	public static UserModel userModel;
+	public UserModel userModel;
 	
-	static	{
-		UserController.userModel = new UserModel();
+	public UserController(Connection dbConnection)	{
+		this.userModel = new UserModel(dbConnection);
+	}
+	
+	public boolean isPresent(String value, String whatToCheck)	{
+		return this.userModel.isPresent(value, whatToCheck);
 	}
 	
 	@Override
 	public boolean isIdPresent(String id) {
-		return UserController.userModel.isIdPresent(id);
+		return this.userModel.isIdPresent(id);
+	}
+	
+	public boolean isEmailPresent(String email)	{
+		return this.userModel.isEmailPresent(email);
+	}
+	
+	public boolean isUsernamePresent(String username)	{
+		return this.userModel.isUsernamePresent(username);
+	}
+	
+	public boolean isMobilePresent(String mobileNum)	{
+		return this.userModel.isMobilePresent(mobileNum);
 	}
 
 	@Override
 	public String getName(String id) {
-		return UserController.userModel.getName(id);
+		return this.userModel.getName(id);
 	}
 
 	@Override
 	public String getFirstName(String id) {
-		return UserController.userModel.getFirstName(id);
+		return this.userModel.getFirstName(id);
 	}
 
 	@Override
 	public String getLastName(String id) {
-		return UserController.userModel.getLastName(id);
+		return this.userModel.getLastName(id);
 	}
 
 	@Override
 	public String getMobileNumber(String id) {
-		return UserController.userModel.getMobileNumber(id);
+		return this.userModel.getMobileNumber(id);
 	}
 
 	@Override
 	public String getGovtIdType(String id) {
-		return UserController.userModel.getGovtIdType(id);
+		return this.userModel.getGovtIdType(id);
 	}
 
 	@Override
 	public String getGovtIdNumber(String id) {
-		return UserController.userModel.getGovtIdNumber(id);
+		return this.userModel.getGovtIdNumber(id);
 	}
 
 	@Override
 	public String getDrivingLicenseNumber(String id) {
-		return UserController.userModel.getDrivingLicenseNumber(id);
+		return this.userModel.getDrivingLicenseNumber(id);
 	}
 
 	@Override
 	public String getUsername(String id) {
-		return UserController.userModel.getUsername(id);
+		return this.userModel.getUsername(id);
 	}
 
 	@Override
 	public String getEmail(String id) {
-		return UserController.userModel.getEmail(id);
+		return this.userModel.getEmail(id);
 	}
 
 	@Override
 	public String getWallet(String id) {
-		return UserController.userModel.getWallet(id);
+		return this.userModel.getWallet(id);
 	}
 
 	@Override
 	public boolean setUser(Person person) {
-		return UserController.userModel.setUser(person);
+		return this.userModel.setUser(person);
 	}
 
 	@Override
 	public boolean updateFirstName(String id, String firstName) {
-		return UserController.userModel.updateFirstName(id, firstName);
+		return this.userModel.updateFirstName(id, firstName);
 	}
 
 	@Override
 	public boolean updateLastName(String id, String lastName) {
-		return UserController.userModel.updateLastName(id, lastName);
+		return this.userModel.updateLastName(id, lastName);
 	}
 
 	@Override
 	public boolean updateMobileNumber(String id, String mobileNumber) {
-		return UserController.userModel.updateMobileNumber(id, mobileNumber);
+		return this.userModel.updateMobileNumber(id, mobileNumber);
 	}
 
 	@Override
 	public boolean updateGovtIdType(String id, String govtIdType) {
-		return UserController.userModel.updateGovtIdType(id, govtIdType);
+		return this.userModel.updateGovtIdType(id, govtIdType);
 	}
 
 	@Override
 	public boolean updateGovtIdNumber(String id, String govtIdNumber) {
-		return UserController.userModel.updateGovtIdNumber(id, govtIdNumber);
+		return this.userModel.updateGovtIdNumber(id, govtIdNumber);
 	}
 
 	@Override
 	public boolean updateDrivingLicenseNumber(String id, String drivingLicenseNumber) {
-		return UserController.userModel.updateDrivingLicenseNumber(id, drivingLicenseNumber);
+		return this.userModel.updateDrivingLicenseNumber(id, drivingLicenseNumber);
 	}
 
 	@Override
 	public boolean updateUsername(String id, String username) {
-		return UserController.userModel.updateUsername(id, username);
+		return this.userModel.updateUsername(id, username);
 	}
 
 	@Override
 	public boolean updateEmail(String id, String email) {
-		return UserController.userModel.updateEmail(id, email);
+		return this.userModel.updateEmail(id, email);
 	}
 
 	@Override
 	public boolean updateWallet(String id, String wallet) {
-		return UserController.userModel.updateWallet(id, wallet);
+		return this.userModel.updateWallet(id, wallet);
 	}
 
 	@Override
 	public String get(String id, String whatToGet) {
-		return UserController.userModel.get(id, whatToGet);
+		return this.userModel.get(id, whatToGet);
 	}
 
 	@Override
 	public boolean update(String id, String whatToUpdate, String value) {
-		return UserController.userModel.update(id, whatToUpdate, value);
+		return this.userModel.update(id, whatToUpdate, value);
 	}
 
 	public Person getPerson(String id)	{
-		return UserController.userModel.getPerson(id);
+		return this.userModel.getPerson(id);
 	}
 	
 	public boolean deletePerson(String id)	{
-		return UserController.userModel.deletePerson(id);
+		return this.userModel.deletePerson(id);
 	}
 	
 	public String getId(String uniqueId)	{
-		return UserController.userModel.getId(uniqueId);
+		return this.userModel.getId(uniqueId);
+	}
+	
+	public String getTotalUsers()	{
+		return this.userModel.getTotalUsers();
 	}
 }

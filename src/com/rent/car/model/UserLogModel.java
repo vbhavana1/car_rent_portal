@@ -5,16 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.rent.car.bean.Person;
 import com.rent.car.bean.UserLog;
+//import com.rent.car.controller.ContextListener;
 import com.rent.car.helper.Debug;
-import com.rent.car.helper.RentCarException;
+//import com.rent.car.helper.RentCarException;
 
 
 public class UserLogModel implements UserLogModelInterface	{
 	
-	private static Connection dbConnection;
+	private Connection dbConnection;
 	private static PreparedStatement stmt;
 	private static Debug debug;
+	
+	public UserLogModel(Connection dbConnection)	{
+		this.dbConnection = dbConnection;
+	}
 	
 	static	{
 		
@@ -22,21 +28,21 @@ public class UserLogModel implements UserLogModelInterface	{
 		UserLogModel.debug = new Debug();
 		UserLogModel.debug.setPrintLog(true);
 		
-		try	{
-			UserLogModel.dbConnection = ContextListener.useContextConnection();
-		}
-		catch(RentCarException rce)	{
-			UserLogModel.debug.printMessage("BookingModel.static_block", "connection is not established");
-			System.out.println(rce);
-		}
+//		try	{
+//			this.dbConnection = ContextListener.useContextConnection();
+//		}
+//		catch(RentCarException rce)	{
+//			UserLogModel.debug.printMessage("BookingModel.static_block", "connection is not established");
+//			System.out.println(rce);
+//		}
 	}
 
 	@Override
 	public boolean isUserIdPresent(String id) {
-		String query = "select userLog_id from user_table where user_id=?";
+		String query = "select user_id from users_log where user_id=?";
 		
 		try	{
-			UserLogModel.stmt = UserLogModel.dbConnection.prepareStatement(query);
+			UserLogModel.stmt = this.dbConnection.prepareStatement(query);
 			UserLogModel.stmt.setString(1, id);
 			
 			ResultSet rs = UserLogModel.stmt.executeQuery();
@@ -62,7 +68,7 @@ public class UserLogModel implements UserLogModelInterface	{
 		String query = "insert into users_log values (?,?,?,?,?,?,?,?,?,?)";
 		
 		try	{
-			UserLogModel.stmt = UserLogModel.dbConnection.prepareStatement(query);
+			UserLogModel.stmt = this.dbConnection.prepareStatement(query);
 			UserLogModel.stmt.setString(1, userLog.getUserId());
 			UserLogModel.stmt.setString(2, userLog.getStartTime());
 			UserLogModel.stmt.setString(3, userLog.getEndTime());
@@ -91,15 +97,14 @@ public class UserLogModel implements UserLogModelInterface	{
 	}
 	
 	@Override
-	public String get(String id, String whatToGet, String secretKey) {
-		String query = String.format("select %s from users_log where user_id=? and secret_key=?", whatToGet);
+	public String get(String id, String whatToGet) {
+		String query = String.format("select %s from users_log where user_id=?", whatToGet);
 		
 		try {
-			UserLogModel.stmt = UserLogModel.dbConnection.prepareStatement(query);
+			UserLogModel.stmt = this.dbConnection.prepareStatement(query);
 			UserLogModel.stmt.setString(1, id);
-			UserLogModel.stmt.setString(2, secretKey);
 			
-			ResultSet rs = UserLogModel.stmt.executeQuery(query);
+			ResultSet rs = UserLogModel.stmt.executeQuery();
 			String returnIt = "";
 			
 			while(rs.next())	{
@@ -116,14 +121,13 @@ public class UserLogModel implements UserLogModelInterface	{
 	}
 
 	@Override
-	public boolean update(String id, String whatToUpdate, String value, String secretKey) {
+	public boolean update(String id, String whatToUpdate, String value) {
 		String query = String.format("update users_log set %s=? where user_id=? and secret_key=?", whatToUpdate);
 		
 		try	{
-			UserLogModel.stmt = UserLogModel.dbConnection.prepareStatement(query);
+			UserLogModel.stmt = this.dbConnection.prepareStatement(query);
 			UserLogModel.stmt.setString(1, value);
 			UserLogModel.stmt.setString(2, id);
-			UserLogModel.stmt.setString(3, secretKey);
 			
 			if(UserLogModel.stmt.executeUpdate() != 0)	{
 				debug.printMessage("update", "value " + whatToUpdate + ": " + value + " is updated in users_log");
@@ -141,100 +145,100 @@ public class UserLogModel implements UserLogModelInterface	{
 	}
 
 	@Override
-	public String getStartTime(String id, String secretKey) {
-		return this.get(id, "start_time", secretKey);
+	public String getStartTime(String id) {
+		return this.get(id, "start_time");
 	}
 
 	@Override
-	public String getEndTime(String id, String secretKey) {
-		return this.get(id, "end_time", secretKey);
+	public String getEndTime(String id) {
+		return this.get(id, "end_time");
 	}
 
 	@Override
-	public String getDeliveredTime(String id, String secretKey) {
-		return this.get(id, "delivered_time", secretKey);
+	public String getDeliveredTime(String id) {
+		return this.get(id, "delivered_time");
 	}
 
 	@Override
-	public String getCurrentLocation(String id, String secretKey) {
-		return this.get(id, "current_location", secretKey);
+	public String getCurrentLocation(String id) {
+		return this.get(id, "current_location");
 	}
 
 	@Override
-	public String getDropLocation(String id, String secretKey) {
-		return this.get(id, "drop_location", secretKey);
+	public String getDropLocation(String id) {
+		return this.get(id, "drop_location");
 	}
 
 	@Override
-	public String getMessage(String id, String secretKey) {
-		return this.get(id, "msg", secretKey);
+	public String getMessage(String id) {
+		return this.get(id, "msg");
 	}
 
 	@Override
-	public String getTotalAmount(String id, String secretKey) {
-		return this.get(id, "total_amount", secretKey);
+	public String getTotalAmount(String id) {
+		return this.get(id, "total_amount");
 	}
 
 	@Override
-	public String getPaidAmount(String id, String secretKey) {
-		return this.get(id, "paid_amount", secretKey);
+	public String getPaidAmount(String id) {
+		return this.get(id, "paid_amount");
 	}
 
 	@Override
-	public String getSecretKey(String id, String secretKey) {
-		return this.get(id, "secret_key", secretKey);
+	public String getSecretKey(String id) {
+		return this.get(id, "secret_key");
 	}
 
 	@Override
-	public boolean updateStartTime(String id, String startTime, String secretKey) {
-		return this.update(id, "start_time", startTime, secretKey);
+	public boolean updateStartTime(String id, String startTime) {
+		return this.update(id, "start_time", startTime);
 	}
 
 	@Override
-	public boolean updateEndTime(String id, String endTime, String secretKey) {
-		return this.update(id, "end_time", endTime, secretKey);
+	public boolean updateEndTime(String id, String endTime) {
+		return this.update(id, "end_time", endTime);
 	}
 
 	@Override
-	public boolean updateDeliveredTime(String id, String deliveredTime, String secretKey) {
-		return this.update(id, "delivered_time", deliveredTime, secretKey);
+	public boolean updateDeliveredTime(String id, String deliveredTime) {
+		return this.update(id, "delivered_time", deliveredTime);
 	}
 
 	@Override
-	public boolean updateCurrentLocation(String id, String currentLocation, String secretKey) {
-		return this.update(id, "current_location", currentLocation, secretKey);
+	public boolean updateCurrentLocation(String id, String currentLocation) {
+		return this.update(id, "current_location", currentLocation);
 	}
 
 	@Override
-	public boolean updateDropLocation(String id, String dropLocation, String secretKey) {
-		return this.update(id, "drop_location", dropLocation, secretKey);
+	public boolean updateDropLocation(String id, String dropLocation) {
+		return this.update(id, "drop_location", dropLocation);
 	}
 
 	@Override
-	public boolean updateMessage(String id, String message, String secretKey) {
-		return this.update(id, "msg", message, secretKey);
+	public boolean updateMessage(String id, String message) {
+		return this.update(id, "msg", message);
 	}
 
 	@Override
-	public boolean updateTotalAmount(String id, String totalAmount, String secretKey) {
-		return this.update(id, "total_amount", totalAmount, secretKey);
+	public boolean updateTotalAmount(String id, String totalAmount) {
+		return this.update(id, "total_amount", totalAmount);
 	}
 
 	@Override
-	public boolean updatePaidAmount(String id, String paidAmount, String secretKey) {
-		return this.update(id, "paid_amount", paidAmount, secretKey);
+	public boolean updatePaidAmount(String id, String paidAmount) {
+		return this.update(id, "paid_amount", paidAmount);
 	}
 
 	@Override
-	public boolean updateSecretKey(String id, String updateToThisKey, String secretKey) {
-		return this.update(id, "secret_key", updateToThisKey, secretKey);
+	public boolean updateSecretKey(String id, String updateToThisKey) {
+		return this.update(id, "secret_key", updateToThisKey);
 	}
 	
-	public boolean deleteUserLog(String id, String secretKey) {
+	public boolean deleteUserLog(String id) {
 		String query = "delete from users_log where userLog_id=? limit 1";
 		
 		try	{
-			UserLogModel.stmt = UserLogModel.dbConnection.prepareStatement(query);
+			UserLogModel.stmt = this.dbConnection.prepareStatement(query);
 			UserLogModel.stmt.setString(1, id);
 			
 			if(UserLogModel.stmt.executeUpdate() != 0)	{
@@ -252,13 +256,62 @@ public class UserLogModel implements UserLogModelInterface	{
 		}
 	}
 	
-	public UserLog getUserLog(String id, String secretKey)	{
-		if(!this.getSecretKey(id, secretKey).equals(""))	{
-			return new UserLog(id, this.getStartTime(id, secretKey), this.getEndTime(id, secretKey), this.getDeliveredTime(id, secretKey),
-					this.getCurrentLocation(id, secretKey), this.getDropLocation(id, secretKey), this.getMessage(id, secretKey), this.getTotalAmount(id, secretKey),
-					this.getPaidAmount(id, secretKey), this.getSecretKey(id, secretKey));
+	public UserLog getUserLog(String id)	{
+		if(!this.getSecretKey(id).equals(""))	{
+			return new UserLog(id, this.getStartTime(id), this.getEndTime(id), this.getDeliveredTime(id),
+					this.getCurrentLocation(id), this.getDropLocation(id), this.getMessage(id), this.getTotalAmount(id),
+					this.getPaidAmount(id), this.getSecretKey(id));
 		}
 		else	return new UserLog();
 	}
-
+	
+	public UserLog[] getUserHistory(String id) {
+		String query = "select * from users_log where user_id=?";
+		
+		try {
+			UserLogModel.stmt = this.dbConnection.prepareStatement(query);
+			UserLogModel.stmt.setString(1, id);
+			
+			ResultSet rs = UserLogModel.stmt.executeQuery();
+			String returnIt = "";
+			
+			while(rs.next())	{
+				for(int i=2; i<=10; ++i)	{
+					if(i != 10)	{
+						returnIt += rs.getString(i) + "#";
+					}
+					else	{
+						returnIt += rs.getString(i);
+					}
+				}
+				returnIt += "$";
+			}
+			
+			String[] rows = returnIt.split("$");
+			UserLog[] log = new UserLog[rows.length];
+			
+			for(int i=0; i<rows.length; ++i)	{
+				String[] details = rows[i].split("#");
+				
+				log[i].setStartTime(details[0]);
+				log[i].setEndTime(details[1]);
+				log[i].setDeliveredTime(details[2]);
+				log[i].setCurrentLocation(details[3]);
+				log[i].setDropLocation(details[4]);
+				log[i].setMessage(details[5]);
+				log[i].setTotalAmount(details[6]);
+				log[i].setPaidAmount(details[7]);
+				log[i].setSecretKey(details[8]);
+				
+				debug.printMessage("getUserHistory", "detail: " + details);
+			}
+			
+			return log;
+		}
+		catch (SQLException e) {
+			debug.printMessage("get", "cannot get the data");
+			e.printStackTrace();
+			return new UserLog[1];
+		}
+	}
 }

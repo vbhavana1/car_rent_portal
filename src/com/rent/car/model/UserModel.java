@@ -6,14 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.rent.car.bean.Person;
+//import com.rent.car.controller.ContextListener;
 import com.rent.car.helper.Debug;
-import com.rent.car.helper.RentCarException;
+//import com.rent.car.helper.RentCarException;
 
 public class UserModel implements UserModelInterface {
 	
-	private static Connection dbConnection;
+	private Connection dbConnection;
 	private static PreparedStatement stmt;
 	private static Debug debug;
+	
+	public UserModel(Connection dbConnection)	{
+		this.dbConnection = dbConnection;
+	}
 	
 	static	{
 		
@@ -21,13 +26,13 @@ public class UserModel implements UserModelInterface {
 		UserModel.debug = new Debug();
 		UserModel.debug.setPrintLog(true);
 		
-		try	{
-			UserModel.dbConnection = ContextListener.useContextConnection();
-		}
-		catch(RentCarException rce)	{
-			UserModel.debug.printMessage("UserModel.static_block", "connection is not established");
-			System.out.println(rce);
-		}
+//		try	{
+//			this.dbConnection = ContextListener.useContextConnection();
+//		}
+//		catch(RentCarException rce)	{
+//			UserModel.debug.printMessage("UserModel.static_block", "connection is not established");
+//			System.out.println(rce);
+//		}
 	}
 
 	@Override
@@ -35,14 +40,15 @@ public class UserModel implements UserModelInterface {
 		String query = String.format("select %s from user_table where user_id=?", whatToGet);
 		
 		try {
-			UserModel.stmt = UserModel.dbConnection.prepareStatement(query);
+			UserModel.stmt = this.dbConnection.prepareStatement(query);
 			UserModel.stmt.setString(1, id);
 			
-			ResultSet rs = UserModel.stmt.executeQuery(query);
+			ResultSet rs = UserModel.stmt.executeQuery();
 			String returnIt = "";
 			
 			while(rs.next())	{
 				returnIt = rs.getString(1);
+
 			}
 			debug.printMessage("get", "id: " + id + " " + whatToGet + ": " + returnIt);
 			return returnIt;
@@ -59,7 +65,7 @@ public class UserModel implements UserModelInterface {
 		String query = "insert into user_table values (?,?,?,?,?,?,?,?,?,?,?)";
 		
 		try	{
-			UserModel.stmt = UserModel.dbConnection.prepareStatement(query);
+			UserModel.stmt = this.dbConnection.prepareStatement(query);
 			UserModel.stmt.setString(1, person.getId());
 			UserModel.stmt.setString(2, person.getFirstName());
 			UserModel.stmt.setString(3, person.getLastName());
@@ -93,7 +99,7 @@ public class UserModel implements UserModelInterface {
 		String query = String.format("update user_table set %s=? where user_id=?", whatToUpdate);
 		
 		try	{
-			UserModel.stmt = UserModel.dbConnection.prepareStatement(query);
+			UserModel.stmt = this.dbConnection.prepareStatement(query);
 			UserModel.stmt.setString(1, value);
 			UserModel.stmt.setString(2, id);
 			
@@ -111,29 +117,28 @@ public class UserModel implements UserModelInterface {
 			return false;
 		}
 	}
-	
-	@Override
-	public boolean isIdPresent(String id)	{
-		String query = "select user_id from user_table where user_id=?";
+
+	public boolean isPresent(String id, String whatToCheck)	{
+		String query = String.format("select %s from user_table where user_id=?", whatToCheck);
 		
 		try	{
-			UserModel.stmt = UserModel.dbConnection.prepareStatement(query);
+			UserModel.stmt = this.dbConnection.prepareStatement(query);
 			UserModel.stmt.setString(1, id);
 			
 			ResultSet rs = UserModel.stmt.executeQuery();
 			
 			while(rs.next())	{
 				if(rs.getString(1).equals(id))	{
-					debug.printMessage("isIdPresent", "id:" + id + " is present");
+					debug.printMessage("isPresent", "id:" + id + " is present");
 					return true;
 				}
 			}
 			
-			debug.printMessage("isIdPresent", "id:" + id + " is not present");
+			debug.printMessage("isPresent", "id:" + id + " is not present");
 			return false;
 		}
 		catch(SQLException e)	{
-			debug.printMessage("isIdPresent", "cannot fetch id");
+			debug.printMessage("isPresent", "cannot fetch id");
 			return false;
 		}
 	}
@@ -249,7 +254,7 @@ public class UserModel implements UserModelInterface {
 		String query = "delete from user_table where user_id=? limit 1";
 		
 		try	{
-			UserModel.stmt = UserModel.dbConnection.prepareStatement(query);
+			UserModel.stmt = this.dbConnection.prepareStatement(query);
 			UserModel.stmt.setString(1, id);
 			
 			if(UserModel.stmt.executeUpdate() != 0)	{
@@ -271,12 +276,12 @@ public class UserModel implements UserModelInterface {
 		String query = "select user_id from user_table where mobile_num=? or user_name=? or email=?";
 		
 		try {
-			UserModel.stmt = UserModel.dbConnection.prepareStatement(query);
+			UserModel.stmt = this.dbConnection.prepareStatement(query);
 			UserModel.stmt.setString(1, uniqueId);
 			UserModel.stmt.setString(2, uniqueId);
 			UserModel.stmt.setString(3, uniqueId);
 			
-			ResultSet rs = UserModel.stmt.executeQuery(query);
+			ResultSet rs = UserModel.stmt.executeQuery();
 			String returnIt = "";
 			
 			while(rs.next())	{
@@ -287,6 +292,45 @@ public class UserModel implements UserModelInterface {
 		}
 		catch (SQLException e) {
 			debug.printMessage("getId", "cannot get the data");
+			e.printStackTrace();
+			return "";
+		}
+	}
+	
+	@Override
+	public boolean isIdPresent(String id)	{
+		return this.isPresent(id, "user_id");
+	}
+	
+	public boolean isEmailPresent(String email)	{
+		return this.isPresent(email, "email");
+	}
+	
+	public boolean isUsernamePresent(String username)	{
+		return this.isPresent(username, "user_name");
+	}
+	
+	public boolean isMobilePresent(String mobileNum)	{
+		return this.isPresent(mobileNum, "mobile_num");
+	}
+	
+	public String getTotalUsers()	{
+		String query = "select count(user_id) from user_table";
+		
+		try {
+			UserModel.stmt = this.dbConnection.prepareStatement(query);
+			
+			ResultSet rs = UserModel.stmt.executeQuery();
+			String returnIt = "";
+			
+			while(rs.next())	{
+				returnIt = rs.getString(1);
+			}
+			debug.printMessage("getTotalUsers", "users: " + returnIt);
+			return returnIt;
+		}
+		catch (SQLException e) {
+			debug.printMessage("getTotalUsers", "cannot get the data");
 			e.printStackTrace();
 			return "";
 		}
