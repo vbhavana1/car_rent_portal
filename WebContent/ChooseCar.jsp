@@ -250,7 +250,10 @@
          		 $('#collapsibleBooking').collapsible();
          		 $('#collapsibleAccount').collapsible();
          		 
-         	
+         		
+         		
+         		
+         		
          	<!-- Author Dheeraj Joshi-->
          		 $(".minicar").click(function(e){
          	          e.preventDefault();
@@ -267,7 +270,7 @@
      
      
          	                
-         	                		  var newcar=   $('<div class="col s12 m6 l3"><div class="card amber lighten-5 z-depth-3 card-style"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src='+element.img_path+'></div><div class="card-content"><span class="card-title activator grey-text text-darken-4">'+element.name+'<i class="material-icons right">more_vert</i></span></div><div class="card-reveal indigo lighten-3"><span class="card-title grey-text text-darken-4">'+element.carname+'<i class="material-icons right">close</i></span><p>Affordable, distance and power in a mini package. Good for long distance travel purposes.</p></div></div></div>');
+         	                		  var newcar=   $('<div class="col s12 m6 l3"><div class="card amber lighten-5 z-depth-3 card-style"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src='+element.img_path+'></div><div class="card-content"><span class="card-title activator grey-text text-darken-4">'+element.name+'<form action="Booking.jsp" method="post"><input type="hidden" name="carid" class="right sendid" value="'+element.id+'"><input type="submit" style="background:none;border:none;color:blue;" value="Book"></form></span></div><div class="card-reveal indigo lighten-3"><span class="card-title grey-text text-darken-4">'+element.name+'<i class="material-icons right">close</i></span><p>'+element.description+'<br><br>Cost:'+element.cost+'Rs'+'<br>Milegae:'+element.mileage+'<br>Seaters:'+element.seats+'</p></div></div></div>');
          	                		
          	                		  $('#dynamicrow').append(newcar); 
          	                
@@ -292,7 +295,7 @@
      console.log("got it");
          	          
          	                
-         	                		  var newcar=   $('<div class="col s12 m6 l3"><div class="card amber lighten-5 z-depth-3 card-style"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src='+element.img_path+'></div><div class="card-content"><span class="card-title activator grey-text text-darken-4">'+element.name+'<i class="material-icons right">more_vert</i></span></div><div class="card-reveal indigo lighten-3"><span class="card-title grey-text text-darken-4">'+element.carname+'<i class="material-icons right">close</i></span><p>Affordable, distance and power in a mini package. Good for long distance travel purposes.</p></div></div></div>');
+         	                		  var newcar=   $('<div class="col s12 m6 l3"><div class="card amber lighten-5 z-depth-3 card-style"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src='+element.img_path+'></div><div class="card-content"><span class="card-title activator grey-text text-darken-4">'+element.name+'<form action="Booking.jsp" method="post"><input type="hidden" name="carid" class="right sendid" value="'+element.id+'"><input type="submit" style="background:none;border:none;color:blue;" value="Book"></form></span></div><div class="card-reveal indigo lighten-3"><span class="card-title grey-text text-darken-4">'+element.name+'<i class="material-icons right">close</i></span><p>'+element.description+'<br><br>Cost:'+element.cost+'Rs'+'<br>Mileage'+element.mileage+'<br>Seaters:'+element.seats+'</p></div></div></div>');
          	                		 $('#dynamicrow').append(newcar); 
          	                
          	                })}});
@@ -311,7 +314,7 @@
 console.log("got it");
     	          
     	                
-    	                		  var newcar=   $('<div class="col s12 m6 l3"><div class="card amber lighten-5 z-depth-3 card-style"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src='+element.img_path+'></div><div class="card-content"><span class="card-title activator grey-text text-darken-4">'+element.name+'<i class="material-icons right">more_vert</i></span></div><div class="card-reveal indigo lighten-3"><span class="card-title grey-text text-darken-4">'+element.carname+'<i class="material-icons right">close</i></span><p>Affordable, distance and power in a mini package. Good for long distance travel purposes.</p></div></div></div>');
+    	                		  var newcar=   $('<div class="col s12 m6 l3"><div class="card amber lighten-5 z-depth-3 card-style"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src='+element.img_path+'></div><div class="card-content"><div class="card-title activator grey-text text-darken-4">'+element.name+'<form action="Booking.jsp" method="post"><input type="hidden" name="carid" class="right sendid" value="'+element.id+'"><input type="submit" style="background:none;border:none;color:blue;" value="Book"></form></div></div><div class="card-reveal indigo lighten-3"><span class="card-title grey-text text-darken-4">'+element.name+'<i class="material-icons right">close</i></span><p>'+element.description+'<br><br>Cost:'+element.cost+'Rs'+'<br>Mileage:'+element.mileage+'<br>Seaters:'+element.seats+'</p></div></div></div>');
     	                		 $('#dynamicrow').append(newcar); 
     	                
     	                })}});
@@ -332,13 +335,26 @@ console.log("got it");
      	                success:function(result){ $.each(result, function(index, element) {
  console.log("got it");
      	                
-     	                		  var newcar=   $('<div class="col s12 m6 l3"><div class="card amber lighten-5 z-depth-3 card-style"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src='+element.img_path+'></div><div class="card-content"><span class="card-title activator grey-text text-darken-4">'+element.name+'<i class="material-icons right">more_vert</i></span></div><div class="card-reveal indigo lighten-3"><span class="card-title grey-text text-darken-4">'+element.carname+'<i class="material-icons right">close</i></span><p>Affordable, distance and power in a mini package. Good for long distance travel purposes.</p></div></div></div>');
+     	                		  var newcar=   $('<div class="col s12 m6 l3"><div class="card amber lighten-5 z-depth-3 card-style"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src='+element.img_path+'></div><div class="card-content"><span class="card-title activator grey-text text-darken-4">'+element.name+'<form action="Booking.jsp" method="post"><input type="hidden" name="carid" class="right sendid" value="'+element.id+'"><input type="submit" style="background:none;border:none;color:blue;" value="Book"></form></div><div class="card-reveal indigo lighten-3"><span class="card-title grey-text text-darken-4">'+element.name+'<i class="material-icons right">close</i></span><p>'+element.description+'<br><br>Cost:'+element.cost+'Rs'+'<br>Mileage:'+element.mileage+'<br>Seaters:'+element.seats+'</p></div></div></div>');
      	                		 $('#dynamicrow').append(newcar); 
      	                
      	                })}});
      	                 	      });
      		 
-         	
+     		
+     		 
+     	
+     		
+     		
+     		
+//      		$(document).on("click",".sendid", function (e) {
+// sessionStorage.setItem("carid",$('.sendid').attr("id"));
+// window.location.replace("Booking.jsp");
+// console.log($('.sendid').attr("id"));
+//      		});
+     		
+     		
+     		
          	
          	} );
       </script>
