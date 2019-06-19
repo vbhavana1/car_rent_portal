@@ -301,14 +301,6 @@
          	                
          	                })}});
          	                 	      });
-         	                 	
-         		 
-         		 
-         	               
-         	                	
-         	                   	
-         	
-         	
 
     		 $(".deluxecar").click(function(e){
     	          e.preventDefault();
