@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.jasper.tagplugins.jstl.core.Catch;
+
 import com.rent.car.bean.Person;
 
 /**
@@ -20,9 +22,10 @@ import com.rent.car.bean.Person;
 @WebServlet("/getcar")
 public class GetCar extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	try {
 		CarController car  = new CarController((Connection)getServletContext().getAttribute("dbConnection"));
 		response.setContentType("application/json");
-		
+	
 		HttpSession userSession = request.getSession();
 		
 		String carname =request.getParameter("carname");
@@ -37,7 +40,11 @@ public class GetCar extends HttpServlet {
 		}
 		response.getWriter().append("]");
 	}
-
+	
+	catch(Exception ex){
+		response.sendRedirect("Index.jsp");
+	}
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
